@@ -64,7 +64,7 @@ const Problem = () => {
             variants={itemVariants}
             className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-center mb-4"
           >
-            Votre Budget Pub Part en Fumée
+            Vous Gaspillez Votre Argent en Pub
           </motion.h2>
           <motion.p 
             variants={itemVariants}
