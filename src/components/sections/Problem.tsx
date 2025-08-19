@@ -64,13 +64,13 @@ const Problem = () => {
             variants={itemVariants}
             className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-center mb-4"
           >
-            Vous Perdez <span className="text-red-500">15 000€/mois</span>
+            Votre Budget Pub Part en Fumée
           </motion.h2>
           <motion.p 
             variants={itemVariants}
             className="text-xl text-text-secondary text-center mb-12"
           >
-            À cause de ces 3 problèmes qui tuent votre business
+            Ces 3 erreurs coûtent cher aux entreprises réunionnaises
           </motion.p>
 
           <motion.div 
