@@ -4,26 +4,42 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 
-const Card = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & { animated?: boolean }
->(({ className, animated = false, ...props }, ref) => {
-  const Component = animated ? motion.div : 'div';
-  
-  return (
-    <Component
-      ref={ref}
-      className={cn(
-        'rounded-xl border bg-white shadow-lg',
-        animated && 'card-hover',
-        className
-      )}
-      whileHover={animated ? { scale: 1.02, y: -5 } : undefined}
-      transition={animated ? { duration: 0.2 } : undefined}
-      {...props}
-    />
-  );
-});
+interface CardProps extends React.HTMLAttributes<HTMLDivElement> {
+  animated?: boolean;
+}
+
+const Card = React.forwardRef<HTMLDivElement, CardProps>(
+  ({ className, animated = false, children, ...props }, ref) => {
+    if (animated) {
+      return (
+        <motion.div
+          ref={ref}
+          className={cn(
+            'rounded-xl border bg-white shadow-lg card-hover',
+            className
+          )}
+          whileHover={{ scale: 1.02, y: -5 }}
+          transition={{ duration: 0.2 }}
+        >
+          {children}
+        </motion.div>
+      );
+    }
+    
+    return (
+      <div
+        ref={ref}
+        className={cn(
+          'rounded-xl border bg-white shadow-lg',
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </div>
+    );
+  }
+);
 Card.displayName = 'Card';
 
 const CardHeader = React.forwardRef<
