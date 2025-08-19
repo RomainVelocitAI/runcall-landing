@@ -3,6 +3,37 @@
 ## Repository GitHub
 Le projet a été poussé sur GitHub : https://github.com/RomainVelocitAI/runcall-landing
 
+## Configuration Vercel
+
+### Étapes pour déployer sur Vercel :
+
+1. **Connectez-vous à Vercel**
+   - Allez sur https://vercel.com
+   - Connectez-vous avec votre compte GitHub
+
+2. **Importez le projet**
+   - Cliquez sur "Add New" → "Project"
+   - Sélectionnez "Import Git Repository"
+   - Choisissez le repository `runcall-landing`
+
+3. **Configuration automatique**
+   - Vercel détectera automatiquement qu'il s'agit d'un projet Next.js
+   - Les paramètres sont déjà configurés dans `vercel.json`
+   - Framework Preset: Next.js (détecté automatiquement)
+   - Build Command: `npm run build`
+   - Output Directory: `.next`
+
+4. **Déployez**
+   - Cliquez sur "Deploy"
+   - Vercel va automatiquement builder et déployer votre site
+
+### Domaine personnalisé Vercel
+
+Pour utiliser votre propre domaine :
+1. Dans le dashboard Vercel, allez dans "Settings" → "Domains"
+2. Ajoutez votre domaine personnalisé
+3. Suivez les instructions DNS fournies
+
 ## Configuration Netlify
 
 ### Étapes pour déployer sur Netlify :
