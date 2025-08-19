@@ -98,10 +98,7 @@ const Problem = () => {
               Le Pire Dans Tout Ça ?
             </h3>
             <p className="text-lg text-red-700 text-center">
-              Vos concurrents qui utilisent des closers professionnels 
-              <span className="font-bold block mt-2">
-                récupèrent VOS clients pendant que vous perdez du temps au téléphone
-              </span>
+              Ce temps passé au téléphone, c'est du temps en moins pour votre métier et vos clients actuels.
             </p>
           </motion.div>
         </motion.div>

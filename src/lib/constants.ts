@@ -48,19 +48,19 @@ export const TESTIMONIALS = [
 
 export const PAIN_POINTS = [
   {
-    icon: "⏰",
-    title: "3h/jour perdues au téléphone",
-    description: "Temps que vous pourriez consacrer à votre cœur de métier"
-  },
-  {
     icon: "💸",
-    title: "40% de leads jamais contactés",
-    description: "15 000€ de CA mensuel qui part en fumée"
+    title: "40% de leads jamais rappelés",
+    description: "Vous payez pour des leads que vous n'avez pas le temps de traiter"
   },
   {
-    icon: "😤",
-    title: "Équipe pas formée à la vente",
-    description: "Vos collaborateurs détestent appeler et ça se sent"
+    icon: "📉",
+    title: "Taux de conversion dérisoire",
+    description: "Sans technique de vente, vos appels ne convertissent pas"
+  },
+  {
+    icon: "⏰",
+    title: "Téléphoner ou travailler ?",
+    description: "Pendant que vous prospectez, votre activité principale prend du retard"
   }
 ]
 
