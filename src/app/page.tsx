@@ -1,6 +1,6 @@
 import Header from '@/components/layout/Header';
 import Hero from '@/components/sections/Hero';
-import Problem from '@/components/sections/Problem';
+import ProblemPremium from '@/components/sections/ProblemPremium';
 import Solution from '@/components/sections/Solution';
 import SocialProof from '@/components/sections/SocialProof';
 import Transformation from '@/components/sections/Transformation';
@@ -14,7 +14,7 @@ export default function Home() {
     <main className="overflow-x-hidden">
       <Header />
       <Hero />
-      <Problem />
+      <ProblemPremium />
       <Solution />
       <SocialProof />
       <Transformation />
