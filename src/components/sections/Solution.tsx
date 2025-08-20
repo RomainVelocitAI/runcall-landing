@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useEffect, useRef, useState } from 'react';
-import { Card, CardContent } from '@/components/ui/Card';
+import { Card, CardContent } from '@/components/ui/card';
 import { SOLUTIONS } from '@/lib/constants';
 
 const Solution = () => {
@@ -80,7 +80,6 @@ const Solution = () => {
             {SOLUTIONS.map((solution, index) => (
               <motion.div key={index} variants={itemVariants}>
                 <Card 
-                  animated
                   className="h-full bg-gradient-to-br from-white to-blue-50 border-blue-200"
                 >
                   <CardContent className="p-6">

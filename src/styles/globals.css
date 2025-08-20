@@ -9,7 +9,6 @@
   --accent: #059669;
   --text-primary: #111827;
   --text-secondary: #6B7280;
-  --background: #FFFFFF;
   --surface: #F9FAFB;
 }
 
@@ -31,6 +30,103 @@
   .cta-button {
     font-family: 'Poppins', sans-serif;
     @apply font-semibold;
+  }
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+    --primary: 217 91% 60%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 25 95% 53%;
+    --secondary-foreground: 0 0% 9%;
+    --muted: 0 0% 96.1%;
+    --muted-foreground: 0 0% 45.1%;
+    --accent: 0 0% 96.1%;
+    --accent-foreground: 0 0% 9%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.8rem;
+    --hu-font-geist: var(--font-geist);
+    --hu-font-jetbrains: var(--font-jetbrains-mono);
+    --card-radius: 1rem;
+    --hu-background: 0, 0%, 100%;
+    --hu-foreground: 0, 0%, 14%;
+    --hu-card: 0, 0%, 99%;
+    --hu-card-foreground: 0, 0%, 14%;
+    --hu-primary: 235, 100%, 60%;
+    --hu-primary-foreground: 0, 0%, 98%;
+    --hu-secondary: 0, 0%, 97%;
+    --hu-secondary-foreground: 0, 0%, 20%;
+    --hu-muted: 0, 0%, 97%;
+    --hu-muted-foreground: 0, 0%, 56%;
+    --hu-accent: 0, 0%, 96%;
+    --hu-accent-foreground: 0, 0%, 20%;
+    --hu-destructive: 9, 96%, 47%;
+    --hu-destructive-foreground: 0, 0%, 98%;
+    --hu-border: 0, 0%, 92%;
+    --hu-input: 0, 0%, 100%;
+    --hu-ring: 0, 0%, 71%;
+    --color-fd-background: hsl(var(--hu-background));
+    --color-fd-card: hsl(var(--hu-background));
+  }
+  .dark {
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 0 0% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 0 0% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 0 0% 9%;
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63.9%;
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 83.1%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+    --hu-background: 0, 0%, 7%;
+    --hu-foreground: 0, 0%, 100%;
+    --hu-card: 0, 0%, 9%;
+    --hu-card-foreground: 0, 0%, 100%;
+    --hu-primary: 235, 100%, 60%;
+    --hu-primary-foreground: 0, 0%, 98%;
+    --hu-secondary: 0, 0%, 15%;
+    --hu-secondary-foreground: 0, 0%, 100%;
+    --hu-muted: 0, 0%, 15%;
+    --hu-muted-foreground: 0, 0%, 71%;
+    --hu-accent: 0, 0%, 15%;
+    --hu-accent-foreground: 0, 0%, 100%;
+    --hu-destructive: 0, 84%, 50%;
+    --hu-destructive-foreground: 0, 0%, 98%;
+    --hu-border: 0, 0%, 100%, 10%;
+    --hu-input: 0, 0%, 100%, 5%;
+    --hu-ring: 0, 0%, 56%;
+    --color-fd-background: hsl(var(--hu-background));
+    --color-fd-card: hsl(var(--hu-background));
+  }
+  .theme {
+    --animate-shine: shine var(--duration) infinite linear;
   }
 }
 
@@ -73,5 +169,28 @@
   .scroll-fade-in.visible {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@theme inline {
+  @keyframes shine {
+  0% {
+    background-position: 0% 0%;
+    }
+  50% {
+    background-position: 100% 100%;
+    }
+  to {
+    background-position: 0% 0%;
+    }
   }
 }

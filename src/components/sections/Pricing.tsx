@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { event } from '@/lib/analytics';
 
 interface PricingCardProps {
@@ -40,7 +40,6 @@ const PricingCard = ({
 
   return (
     <Card 
-      animated
       className={`h-full ${
         highlighted 
           ? 'border-2 border-primary shadow-2xl scale-105' 
@@ -119,7 +118,7 @@ const Pricing = () => {
           transition={{ duration: 0.6 }}
           className="max-w-6xl mx-auto"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-center mb-4">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-center mb-4 text-gray-900">
             Tarification Simple et Transparente
           </h2>
           <p className="text-xl text-text-secondary text-center mb-12">

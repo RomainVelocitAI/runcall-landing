@@ -335,7 +335,7 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
   const canvasRef = useShaderBackground();
 
   return (
-    <div className={`relative w-full h-screen overflow-hidden bg-black ${className}`}>
+    <div className={`relative w-full min-h-screen overflow-hidden bg-black ${className}`}>
       <style jsx>{`
         @keyframes fade-in-down {
           from {
@@ -396,7 +396,7 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
       />
       
       {/* Hero Content Overlay */}
-      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-white">
+      <div className="absolute inset-0 z-10 flex flex-col items-center justify-center text-white pt-32 pb-20 sm:pt-20 sm:pb-10 md:pt-0 md:pb-0">
         <div className="container mx-auto px-4">
           <div className="max-w-5xl mx-auto text-center">
             {/* Trust Badge */}
@@ -419,10 +419,10 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
             
             {/* Main Heading with Animation */}
             <div className="space-y-2 mb-6">
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-montserrat font-bold text-white animate-fade-in-up animation-delay-200">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-montserrat font-bold text-white animate-fade-in-up animation-delay-200">
                 {headline.line1}
               </h1>
-              <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-montserrat font-bold bg-gradient-to-r from-cyan-300 via-blue-300 to-white bg-clip-text text-transparent animate-fade-in-up animation-delay-400">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-montserrat font-bold bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-500 bg-clip-text text-transparent animate-fade-in-up animation-delay-400">
                 {headline.line2}
               </h1>
               {headline.line3 && (
@@ -436,7 +436,6 @@ const AnimatedShaderHero: React.FC<HeroProps> = ({
             <div className="max-w-3xl mx-auto animate-fade-in-up animation-delay-600 mb-8">
               <p className="text-lg sm:text-xl text-white/90">
                 {subtitle}
-                <span className="font-semibold block mt-2">100% sur résultats. Garantie 30 jours.</span>
               </p>
             </div>
             
@@ -548,6 +547,16 @@ void main(void) {
 	vec2 uv=(FC-.5*R)/MN,st=uv*vec2(2,1);
 	vec3 col=vec3(0);
 	float bg=clouds(vec2(st.x+T*.5,-st.y));
+	
+	// Offset particles based on screen aspect ratio
+	float aspectRatio = R.x / R.y;
+	if (aspectRatio > 1.2) { // Desktop: wider screens
+		uv.x += 0.5; // Shift particles to the left
+	} else { // Mobile: taller screens
+		uv.y -= 0.35; // Position particles at the top (between header and title)
+		uv *= 0.7; // Make particles smaller on mobile
+	}
+	
 	uv*=1.-.3*(sin(T*.2)*.5+.5);
 	
 	// Runcall cyan gradient colors

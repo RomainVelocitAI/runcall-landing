@@ -1,35 +1,40 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { useEffect, useRef, useState, Suspense } from 'react';
-import dynamic from 'next/dynamic';
-
-// Dynamic import for 3D icons to prevent SSR issues
-const Icon3D = dynamic(
-  () => import('@/components/ui/problem-icons-3d').then((mod) => ({ default: mod.Icon3D })),
-  { 
-    ssr: false,
-    loading: () => (
-      <div className="w-32 h-32 bg-gradient-to-br from-cyan-400/10 to-blue-500/10 rounded-2xl animate-pulse" />
-    )
-  }
-);
+import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
+import { ShineBorder } from '@/components/magicui/shine-border';
 
 const PAIN_POINTS = [
   {
-    type: 'money' as const,
-    title: "40% de leads jamais rappelés",
-    description: "Vous payez pour des leads que vous n'avez pas le temps de traiter"
+    icon: '/appel.png',
+    title: "Leads non convertis",
+    stat: "40%",
+    subtitle: "prospects perdus",
+    description: "Chaque lead ignoré représente de l'argent jeté par la fenêtre. Votre investissement publicitaire part en fumée.",
+    color: "from-red-50 to-orange-50",
+    borderColor: "border-red-100",
+    statColor: "text-red-600"
   },
   {
-    type: 'chart' as const,
-    title: "Taux de conversion dérisoire",
-    description: "Sans technique de vente, vos appels ne convertissent pas"
+    icon: '/faible-niveau-de-rendement.png',
+    title: "Taux de conversion faible",
+    stat: "6%",
+    subtitle: "taux de conversion",
+    description: "Sans expertise commerciale, vos appels échouent. 15 prospects sur 16 ne deviennent jamais clients.",
+    color: "from-amber-50 to-yellow-50",
+    borderColor: "border-amber-100",
+    statColor: "text-amber-600"
   },
   {
-    type: 'clock' as const,
-    title: "Téléphoner ou travailler ?",
-    description: "Pendant que vous prospectez, votre activité principale prend du retard"
+    icon: '/moralite.png',
+    title: "Dilemme impossible",
+    stat: "24h",
+    subtitle: "/jour seulement",
+    description: "Vous ne pouvez pas être au four et au moulin. Choisir entre prospecter et gérer votre entreprise est un choix impossible.",
+    color: "from-blue-50 to-cyan-50",
+    borderColor: "border-blue-100",
+    statColor: "text-blue-600"
   }
 ];
 
@@ -63,101 +68,136 @@ const ProblemPremium = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.2,
+        staggerChildren: 0.12,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
       transition: {
         duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
+        ease: [0.25, 0.1, 0.25, 1],
       },
     },
   };
 
   return (
-    <section ref={sectionRef} className="py-24 relative overflow-hidden">
-      {/* Premium gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-cyan-50/30" />
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100/20 via-transparent to-transparent" />
-      
+    <section ref={sectionRef} className="py-32 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      {/* Subtle background pattern */}
+      <div className="absolute inset-0 opacity-[0.02]">
+        <div className="absolute inset-0" style={{
+          backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+        }} />
+      </div>
+
       <div className="container mx-auto px-4 relative z-10">
         <motion.div
           initial="hidden"
           animate={isVisible ? 'visible' : 'hidden'}
           variants={containerVariants}
-          className="max-w-5xl mx-auto"
+          className="max-w-7xl mx-auto"
         >
-          {/* Title with premium gradient */}
-          <motion.h2 
-            variants={itemVariants}
-            className="text-4xl sm:text-5xl md:text-6xl font-montserrat font-bold text-center mb-4 bg-gradient-to-r from-gray-900 via-blue-900 to-cyan-900 bg-clip-text text-transparent"
-          >
-            Vous Gaspillez Votre Argent en Pub
-          </motion.h2>
-          <motion.p 
-            variants={itemVariants}
-            className="text-xl text-gray-600 text-center mb-16 font-light"
-          >
-            Ces 3 erreurs coûtent cher aux entreprises réunionnaises
-          </motion.p>
+          {/* Premium headline */}
+          <motion.div variants={itemVariants} className="text-center mb-20">
+            <p className="text-sm font-sora font-semibold uppercase tracking-wider text-red-600 mb-4">
+              Le Problème Invisible
+            </p>
+            <h2 className="text-5xl sm:text-6xl md:text-7xl font-plus-jakarta font-bold text-gray-900 leading-tight mb-6">
+              Votre Budget Marketing
+              <span className="block text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600">
+                Part en Fumée
+              </span>
+            </h2>
+            <p className="text-xl text-gray-600 font-plus-jakarta font-light max-w-3xl mx-auto">
+              Découvrez les 3 fuites silencieuses qui drainent vos ressources et sabotent votre croissance
+            </p>
+          </motion.div>
 
-          {/* Premium glassmorphism cards */}
+          {/* Professional cards grid */}
           <motion.div 
             variants={containerVariants}
-            className="grid md:grid-cols-3 gap-8 mb-20"
+            className="grid lg:grid-cols-3 gap-8 mb-20"
           >
             {PAIN_POINTS.map((point, index) => (
               <motion.div key={index} variants={itemVariants}>
-                <div className="group h-full relative">
-                  {/* Glassmorphism card */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-white/50 to-white/30 backdrop-blur-xl rounded-3xl shadow-xl border border-white/20" />
-                  <div className="relative p-8 h-full flex flex-col items-center text-center">
-                    {/* 3D Icon */}
-                    <div className="mb-6 transform group-hover:scale-110 transition-transform duration-500">
-                      <Suspense fallback={
-                        <div className="w-32 h-32 bg-gradient-to-br from-cyan-400/10 to-blue-500/10 rounded-2xl animate-pulse" />
-                      }>
-                        <Icon3D type={point.type} />
-                      </Suspense>
+                <div className="relative rounded-2xl">
+                  <div className={`relative bg-gradient-to-br ${point.color} rounded-2xl border ${point.borderColor} p-8 h-full hover:shadow-xl transition-all duration-500 transform hover:-translate-y-1 overflow-hidden`}>
+                    <ShineBorder 
+                      borderWidth={2}
+                      duration={8}
+                      shineColor={[
+                        point.statColor === 'text-red-600' ? '#dc2626' : 
+                        point.statColor === 'text-amber-600' ? '#d97706' : 
+                        '#2563eb',
+                        '#ffffff',
+                        point.statColor === 'text-red-600' ? '#ea580c' : 
+                        point.statColor === 'text-amber-600' ? '#f59e0b' : 
+                        '#0ea5e9'
+                      ]}
+                    />
+                    {/* Icon container */}
+                    <motion.div 
+                      className="mb-6 relative z-10"
+                      whileHover={{ scale: 1.05 }}
+                      transition={{ duration: 0.3 }}
+                    >
+                      <Image 
+                        src={point.icon} 
+                        alt={point.title}
+                        width={80}
+                        height={80}
+                        className="object-contain"
+                      />
+                    </motion.div>
+                    
+                    {/* Stat emphasis */}
+                    <div className="mb-6 relative z-10">
+                      <div className="flex items-baseline gap-2">
+                        <span className={`text-5xl font-plus-jakarta font-bold ${point.statColor}`}>
+                          {point.stat}
+                        </span>
+                        <span className="text-lg font-plus-jakarta font-medium text-gray-600">
+                          {point.subtitle}
+                        </span>
+                      </div>
                     </div>
+                    
                     {/* Content */}
-                    <h3 className="text-xl font-bold mb-3 text-gray-900">{point.title}</h3>
-                    <p className="text-gray-600 leading-relaxed">{point.description}</p>
+                    <h3 className="text-2xl font-plus-jakarta font-bold mb-3 text-gray-900 relative z-10">
+                      {point.title}
+                    </h3>
+                    <p className="text-gray-600 font-plus-jakarta leading-relaxed relative z-10">
+                      {point.description}
+                    </p>
+
+                    {/* Decorative element */}
+                    <div className="absolute top-0 right-0 w-32 h-32 opacity-5">
+                      <div className="w-full h-full rounded-full bg-gradient-to-br from-gray-900 to-gray-600" />
+                    </div>
                   </div>
-                  {/* Hover glow effect */}
-                  <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-cyan-400/0 to-blue-500/0 group-hover:from-cyan-400/10 group-hover:to-blue-500/10 transition-all duration-500 pointer-events-none" />
                 </div>
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Aspirational closing with premium design */}
+          {/* Impact statement */}
           <motion.div
             variants={itemVariants}
             className="relative"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-400/5 via-blue-500/5 to-cyan-400/5 blur-3xl" />
-            <div className="relative bg-gradient-to-br from-white/60 to-white/40 backdrop-blur-xl rounded-3xl p-12 border border-white/20 shadow-2xl">
-              <div className="text-center max-w-3xl mx-auto">
-                <h3 className="text-3xl md:text-4xl font-montserrat font-light mb-6 bg-gradient-to-r from-cyan-600 to-blue-600 bg-clip-text text-transparent">
-                  Et si vous pouviez signer de nouveaux clients
-                </h3>
-                <p className="text-2xl md:text-3xl font-montserrat font-semibold bg-gradient-to-r from-blue-700 to-cyan-700 bg-clip-text text-transparent">
-                  sans vous en occuper ?
-                </p>
-                {/* Subtle decorative elements */}
-                <div className="mt-8 flex justify-center gap-2">
-                  <div className="w-12 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full" />
-                  <div className="w-12 h-1 bg-gradient-to-r from-transparent via-blue-400 to-transparent rounded-full" />
-                  <div className="w-12 h-1 bg-gradient-to-r from-transparent via-cyan-400 to-transparent rounded-full" />
-                </div>
-              </div>
+            <div className="bg-gradient-to-r from-gray-900 to-gray-800 rounded-3xl p-12 md:p-16 text-center shadow-2xl">
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-plus-jakarta font-light text-white mb-6">
+                Résultat : Vous travaillez 
+                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400"> 2x plus dur </span>
+                pour 
+                <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-red-400 to-orange-400"> 2x moins </span>
+                de résultats
+              </h3>
+              <div className="w-32 h-1 bg-gradient-to-r from-red-500 to-orange-500 mx-auto rounded-full" />
             </div>
           </motion.div>
         </motion.div>

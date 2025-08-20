@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import { Card, CardContent } from '@/components/ui/Card';
+import { Card, CardContent } from '@/components/ui/card';
 import { PROCESS_STEPS } from '@/lib/constants';
 
 const Process = () => {
@@ -62,7 +62,7 @@ const Process = () => {
         >
           <motion.h2 
             variants={itemVariants}
-            className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-center mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-center mb-4 text-gray-900"
           >
             Comment Ça Marche ?
           </motion.h2>
@@ -78,17 +78,17 @@ const Process = () => {
             className="relative"
           >
             {/* Connection Line for Desktop */}
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-primary via-secondary to-accent transform -translate-y-1/2 z-0" />
+            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-600 transform -translate-y-1/2 z-0" />
 
             <div className="grid md:grid-cols-4 gap-6 relative z-10">
               {PROCESS_STEPS.map((step, index) => (
                 <motion.div key={step.step} variants={itemVariants}>
                   <Card className="h-full bg-white hover:shadow-2xl transition-all duration-300">
                     <CardContent className="p-6 text-center">
-                      <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-primary to-secondary rounded-full flex items-center justify-center text-white text-2xl font-bold">
+                      <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-blue-600 to-cyan-600 rounded-full flex items-center justify-center text-white text-2xl font-bold">
                         {step.step}
                       </div>
-                      <h3 className="text-xl font-bold mb-2">{step.title}</h3>
+                      <h3 className="text-xl font-bold mb-2 text-gray-900">{step.title}</h3>
                       <p className="text-text-secondary text-sm">
                         {step.description}
                       </p>

@@ -27,8 +27,8 @@ const Hero = () => {
   return (
     <AnimatedShaderHero
       headline={{
-        line1: "Multipliez vos ventes",
-        line2: "grâce à Runcall"
+        line1: "RunCALL convertit",
+        line2: "vos prospects en clients"
       }}
       subtitle="Vous payez de la pub mais vous ne convertissez pas ? On s'occupe de transformer vos prospects en clients."
       buttons={{

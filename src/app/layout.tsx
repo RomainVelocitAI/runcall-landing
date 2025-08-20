@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter, Montserrat, Poppins } from 'next/font/google';
+import { Inter, Plus_Jakarta_Sans, Sora } from 'next/font/google';
 import Script from 'next/script';
 import { GA_TRACKING_ID, FB_PIXEL_ID } from '@/lib/analytics';
 import '@/styles/globals.css';
@@ -10,17 +10,17 @@ const inter = Inter({
   display: 'swap',
 });
 
-const montserrat = Montserrat({ 
+const plusJakarta = Plus_Jakarta_Sans({ 
   subsets: ['latin'],
-  variable: '--font-montserrat',
-  weight: ['700', '800'],
+  variable: '--font-plus-jakarta',
+  weight: ['300', '400', '500', '600', '700', '800'],
   display: 'swap',
 });
 
-const poppins = Poppins({ 
+const sora = Sora({ 
   subsets: ['latin'],
-  variable: '--font-poppins',
-  weight: ['600'],
+  variable: '--font-sora',
+  weight: ['400', '600', '700'],
   display: 'swap',
 });
 
@@ -80,7 +80,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="fr" className={`${inter.variable} ${montserrat.variable} ${poppins.variable}`}>
+    <html lang="fr" className={`${inter.variable} ${plusJakarta.variable} ${sora.variable}`}>
       <head>
         {/* Google Analytics */}
         <Script

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import { Card, CardContent } from '@/components/ui/Card';
+import { Card, CardContent } from '@/components/ui/card';
 import { TESTIMONIALS } from '@/lib/constants';
 import TestimonialCard from '@/components/shared/TestimonialCard';
 
@@ -50,7 +50,7 @@ const SocialProof = () => {
           className="max-w-6xl mx-auto"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-center mb-4">
-            Ils Ont <span className="text-gradient">Multiplié Leurs Ventes</span>
+            Ils Ont <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">Multiplié Leurs Ventes</span>
           </h2>
           <p className="text-xl text-text-secondary text-center mb-12">
             Découvrez comment Runcall a transformé leur business

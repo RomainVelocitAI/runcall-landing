@@ -15,9 +15,8 @@ export default function Home() {
       <Header />
       <Hero />
       <ProblemPremium />
-      <Solution />
-      <SocialProof />
       <Transformation />
+      <SocialProof />
       <Process />
       <Pricing />
       <Urgency />
