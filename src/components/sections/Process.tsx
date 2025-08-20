@@ -10,7 +10,6 @@ import { Phone, Users, ChartBar, Trophy, Calendar, FileText, Rocket, Target, Che
 const Process = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
-  const [activeStepIndex, setActiveStepIndex] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -86,8 +85,7 @@ const Process = () => {
             <div className="absolute left-8 top-1/2 -translate-y-1/2 z-20">
               <button
                 onClick={() => {
-                  const prevStep = activeStepIndex > 0 ? activeStepIndex - 1 : 6;
-                  setActiveStepIndex(prevStep);
+                  const prevStep = currentStep > 0 ? currentStep - 1 : 6;
                   setCurrentStep(prevStep);
                 }}
                 className="group p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border-2 border-gray-200 hover:border-blue-500"
@@ -103,8 +101,7 @@ const Process = () => {
             <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20">
               <button
                 onClick={() => {
-                  const nextStep = activeStepIndex < 6 ? activeStepIndex + 1 : 0;
-                  setActiveStepIndex(nextStep);
+                  const nextStep = currentStep < 6 ? currentStep + 1 : 0;
                   setCurrentStep(nextStep);
                 }}
                 className="group p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border-2 border-gray-200 hover:border-blue-500"
@@ -121,7 +118,7 @@ const Process = () => {
             <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
               <div className="bg-white rounded-full px-6 py-2 shadow-lg border-2 border-blue-500">
                 <span className="text-sm font-medium text-gray-700">
-                  Étape {activeStepIndex + 1} sur 7
+                  Étape {currentStep + 1} sur 7
                 </span>
               </div>
             </div>
@@ -140,11 +137,7 @@ const Process = () => {
               } as React.CSSProperties}
             >
             <ArcTimeline
-              activeStep={activeStepIndex}
-              onStepClick={(index: number) => {
-                setActiveStepIndex(index);
-                setCurrentStep(index);
-              }}
+              key={currentStep}
               data={[
                 {
                   time: "Jour 1",
