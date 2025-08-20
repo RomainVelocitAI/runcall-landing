@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card';
 import { event } from '@/lib/analytics';
 
 interface PricingCardProps {

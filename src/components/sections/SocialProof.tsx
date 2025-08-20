@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/Card';
 import { TESTIMONIALS } from '@/lib/constants';
 import TestimonialCard from '@/components/shared/TestimonialCard';
 
