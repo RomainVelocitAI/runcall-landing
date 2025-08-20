@@ -44,7 +44,7 @@ export default function ProspectionToggle({ onToggle }: ProspectionToggleProps) 
             <div className="text-sm text-gray-600 mt-2">
               {isRuncallEnabled ? (
                 <div className="space-y-1">
-                  <p>✅ Closers experts créolophones</p>
+                  <p>✅ Closers experts locaux</p>
                   <p>✅ 8% de conversion minimum</p>
                   <p>✅ Focus 100% sur votre métier</p>
                 </div>

@@ -4,10 +4,14 @@ import { motion } from 'framer-motion';
 import { useState, useEffect, useRef } from 'react';
 import { Card, CardContent } from '@/components/ui/Card';
 import { PROCESS_STEPS } from '@/lib/constants';
+import { ArcTimeline } from '@/components/magicui/arc-timeline';
+import { Phone, Users, ChartBar, Trophy, Calendar, FileText, Rocket, Target, ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Process = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [currentStep, setCurrentStep] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
+  const timelineRef = useRef<any>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -70,17 +74,200 @@ const Process = () => {
             variants={itemVariants}
             className="text-xl text-text-secondary text-center mb-12"
           >
-            4 étapes simples pour multiplier vos ventes
+            Un processus éprouvé en 7 étapes pour multiplier vos ventes
           </motion.p>
 
+          {/* Arc Timeline pour affichage desktop */}
+          <motion.div 
+            variants={itemVariants}
+            className="hidden md:block relative"
+          >
+            {/* Flèches de navigation */}
+            <div className="absolute left-8 top-1/2 -translate-y-1/2 z-20">
+              <button
+                onClick={() => {
+                  const prevStep = currentStep > 0 ? currentStep - 1 : 6;
+                  setCurrentStep(prevStep);
+                  if (timelineRef.current) {
+                    timelineRef.current.goToStep(prevStep);
+                  }
+                }}
+                className="group p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border-2 border-gray-200 hover:border-blue-500"
+                aria-label="Étape précédente"
+              >
+                <ChevronLeft className="w-6 h-6 text-gray-600 group-hover:text-blue-600" />
+              </button>
+              <div className="mt-2 text-center">
+                <span className="text-xs text-gray-500 font-medium">Précédent</span>
+              </div>
+            </div>
+            
+            <div className="absolute right-8 top-1/2 -translate-y-1/2 z-20">
+              <button
+                onClick={() => {
+                  const nextStep = currentStep < 6 ? currentStep + 1 : 0;
+                  setCurrentStep(nextStep);
+                  if (timelineRef.current) {
+                    timelineRef.current.goToStep(nextStep);
+                  }
+                }}
+                className="group p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border-2 border-gray-200 hover:border-blue-500"
+                aria-label="Étape suivante"
+              >
+                <ChevronRight className="w-6 h-6 text-gray-600 group-hover:text-blue-600" />
+              </button>
+              <div className="mt-2 text-center">
+                <span className="text-xs text-gray-500 font-medium">Suivant</span>
+              </div>
+            </div>
+
+            {/* Indicateur d'étape actuelle */}
+            <div className="absolute top-4 left-1/2 -translate-x-1/2 z-20">
+              <div className="bg-white rounded-full px-6 py-2 shadow-lg border-2 border-blue-500">
+                <span className="text-sm font-medium text-gray-700">
+                  Étape {currentStep + 1} sur 7
+                </span>
+              </div>
+            </div>
+
+
+            <div
+              style={{
+                '--step-line-active-color': '#3B82F6',
+                '--step-line-inactive-color': '#E5E7EB',
+                '--icon-active-color': '#1F2937',
+                '--icon-inactive-color': '#9CA3AF',
+                '--description-color': '#374151',
+                '--time-active-color': '#1E40AF',
+                '--time-inactive-color': '#6B7280',
+                '--placeholder-line-color': '#F3F4F6'
+              } as React.CSSProperties}
+            >
+            <ArcTimeline
+              ref={timelineRef}
+              data={[
+                {
+                  time: "Jour 1",
+                  steps: [
+                    {
+                      icon: (
+                        <div className="p-3 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full shadow-lg">
+                          <Phone className="w-6 h-6 text-white" />
+                        </div>
+                      ),
+                      content: (
+                        <div className="mt-8 px-2">
+                          <span className="text-gray-800 font-medium text-sm">Audit gratuit de votre processus commercial</span>
+                        </div>
+                      )
+                    },
+                    {
+                      icon: (
+                        <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full shadow-lg">
+                          <FileText className="w-6 h-6 text-white" />
+                        </div>
+                      ),
+                      content: (
+                        <div className="mt-8 px-2">
+                          <span className="text-gray-800 font-medium text-sm">Analyse de vos scripts et leads actuels</span>
+                        </div>
+                      )
+                    }
+                  ]
+                },
+                {
+                  time: "Semaine 1",
+                  steps: [
+                    {
+                      icon: (
+                        <div className="p-3 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full shadow-lg">
+                          <Users className="w-6 h-6 text-white" />
+                        </div>
+                      ),
+                      content: (
+                        <div className="mt-8 px-2">
+                          <span className="text-gray-800 font-medium text-sm">Attribution de closers experts dans votre domaine</span>
+                        </div>
+                      )
+                    },
+                    {
+                      icon: (
+                        <div className="p-3 bg-gradient-to-br from-orange-500 to-red-500 rounded-full shadow-lg">
+                          <Target className="w-6 h-6 text-white" />
+                        </div>
+                      ),
+                      content: (
+                        <div className="mt-8 px-2">
+                          <span className="text-gray-800 font-medium text-sm">Formation personnalisée sur vos produits</span>
+                        </div>
+                      )
+                    }
+                  ]
+                },
+                {
+                  time: "Semaine 2",
+                  steps: [
+                    {
+                      icon: (
+                        <div className="p-3 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full shadow-lg">
+                          <Rocket className="w-6 h-6 text-white" />
+                        </div>
+                      ),
+                      content: (
+                        <div className="mt-8 px-2">
+                          <span className="text-gray-800 font-medium text-sm">Lancement des appels avec suivi temps réel</span>
+                        </div>
+                      )
+                    },
+                    {
+                      icon: (
+                        <div className="p-3 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-full shadow-lg">
+                          <ChartBar className="w-6 h-6 text-white" />
+                        </div>
+                      ),
+                      content: (
+                        <div className="mt-8 px-2">
+                          <span className="text-gray-800 font-medium text-sm">Dashboard et analytics détaillés</span>
+                        </div>
+                      )
+                    }
+                  ]
+                },
+                {
+                  time: "En continu",
+                  steps: [
+                    {
+                      icon: (
+                        <div className="p-3 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full shadow-lg">
+                          <Trophy className="w-6 h-6 text-white" />
+                        </div>
+                      ),
+                      content: (
+                        <div className="mt-8 px-2">
+                          <span className="text-gray-800 font-medium text-sm">Optimisation continue et amélioration des résultats</span>
+                        </div>
+                      )
+                    }
+                  ]
+                }
+              ]}
+              arcConfig={{
+                circleWidth: 4000,
+                angleBetweenMinorSteps: 0.6,
+                lineCountFillBetweenSteps: 12,
+                boundaryPlaceholderLinesCount: 40
+              }}
+              className="max-w-6xl mx-auto"
+            />
+            </div>
+          </motion.div>
+
+          {/* Version mobile/tablette avec cards */}
           <motion.div 
             variants={containerVariants}
-            className="relative"
+            className="md:hidden relative"
           >
-            {/* Connection Line for Desktop */}
-            <div className="hidden md:block absolute top-1/2 left-0 right-0 h-1 bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-600 transform -translate-y-1/2 z-0" />
-
-            <div className="grid md:grid-cols-4 gap-6 relative z-10">
+            <div className="grid grid-cols-1 gap-6">
               {PROCESS_STEPS.map((step, index) => (
                 <motion.div key={step.step} variants={itemVariants}>
                   <Card className="h-full bg-white hover:shadow-2xl transition-all duration-300">
@@ -99,22 +286,6 @@ const Process = () => {
             </div>
           </motion.div>
 
-          <motion.div
-            variants={itemVariants}
-            className="mt-12 text-center"
-          >
-            <div className="inline-flex items-center gap-4 p-6 bg-orange-50 border-2 border-orange-200 rounded-xl">
-              <div className="text-4xl">⏱️</div>
-              <div className="text-left">
-                <p className="text-2xl font-bold text-orange-800">
-                  Démarrage en 48h
-                </p>
-                <p className="text-lg text-orange-700">
-                  Premiers appels dans les 2 jours suivant votre inscription
-                </p>
-              </div>
-            </div>
-          </motion.div>
         </motion.div>
       </div>
     </section>

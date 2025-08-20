@@ -11,10 +11,13 @@ interface PricingCardProps {
   subtitle: string;
   price: string;
   priceDetail: string;
+  commission?: string;
+  targetBasket?: string;
   features: string[];
   cta: string;
   highlighted: boolean;
   badge?: string;
+  validation?: boolean;
 }
 
 const PricingCard = ({
@@ -22,10 +25,13 @@ const PricingCard = ({
   subtitle,
   price,
   priceDetail,
+  commission,
+  targetBasket,
   features,
   cta,
   highlighted,
   badge,
+  validation,
 }: PricingCardProps) => {
   const handleClick = () => {
     event({
@@ -40,7 +46,7 @@ const PricingCard = ({
 
   return (
     <Card 
-      className={`h-full ${
+      className={`h-full flex flex-col ${
         highlighted 
           ? 'border-2 border-primary shadow-2xl scale-105' 
           : 'border-gray-200'
@@ -52,20 +58,31 @@ const PricingCard = ({
         </div>
       )}
       <CardHeader className="text-center">
-        <CardTitle className="text-2xl">{title}</CardTitle>
-        <p className="text-text-secondary">{subtitle}</p>
+        <CardTitle className="text-2xl text-gray-900">{title}</CardTitle>
+        <p className="text-gray-600">{subtitle}</p>
       </CardHeader>
-      <CardContent className="space-y-6">
+      <CardContent className="flex flex-col flex-grow space-y-6">
         <div className="text-center">
-          <p className="text-4xl font-bold text-primary">{price}</p>
-          <p className="text-sm text-text-secondary mt-1">{priceDetail}</p>
+          <p className="text-4xl font-bold text-blue-600">{price}</p>
+          <p className="text-sm text-gray-600 mt-1">{priceDetail}</p>
+          {commission && (
+            <p className="text-lg font-semibold text-orange-600 mt-2">+ {commission} commission</p>
+          )}
+          {targetBasket && (
+            <p className="text-xs text-gray-600 mt-1">Idéal pour paniers {targetBasket}</p>
+          )}
+          {validation && (
+            <div className="mt-3 inline-block px-3 py-1 bg-yellow-100 text-yellow-800 text-xs font-medium rounded-full">
+              Sur validation du dossier
+            </div>
+          )}
         </div>
         
-        <ul className="space-y-3">
+        <ul className="space-y-3 flex-grow">
           {features.map((feature, index) => (
             <li key={index} className="flex items-start gap-2">
-              <span className="text-green-500 mt-1">✓</span>
-              <span className="text-sm">{feature}</span>
+              <span className="text-green-500 mt-1 flex-shrink-0">✓</span>
+              <span className="text-sm text-gray-700">{feature}</span>
             </li>
           ))}
         </ul>
@@ -73,7 +90,7 @@ const PricingCard = ({
         <Button
           variant={highlighted ? 'default' : 'outline'}
           size="lg"
-          className="w-full"
+          className="w-full mt-auto"
           onClick={handleClick}
         >
           {cta}
@@ -84,9 +101,14 @@ const PricingCard = ({
 };
 
 const Pricing = () => {
-  const [billingMode, setBillingMode] = useState<'commission' | 'hybrid'>('commission');
+  const [billingMode, setBillingMode] = useState<'startup' | 'established'>('startup');
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+  
+  const scrollToCalculator = () => {
+    const element = document.getElementById('roi-calculator');
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -118,133 +140,150 @@ const Pricing = () => {
           transition={{ duration: 0.6 }}
           className="max-w-6xl mx-auto"
         >
-          <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-center mb-4 text-gray-900">
-            Tarification Simple et Transparente
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-center mb-4">
+            Une Formule <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">Adaptée à Votre Stade</span>
           </h2>
-          <p className="text-xl text-text-secondary text-center mb-12">
-            Payez uniquement sur les résultats ou optez pour notre formule hybride
+          <p className="text-xl text-text-secondary text-center mb-8">
+            Startup ou entreprise établie, nous avons la solution pour vous
           </p>
+          
+          {/* Calculateur CTA */}
+          <div className="text-center mb-12">
+            <button
+              onClick={scrollToCalculator}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-semibold rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200"
+            >
+              <span>Découvrir ma formule optimale avec le calculateur</span>
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+              </svg>
+            </button>
+          </div>
           
           {/* Toggle */}
           <div className="flex justify-center mb-12">
             <div className="bg-white rounded-lg shadow-md p-1 flex">
               <button 
-                onClick={() => setBillingMode('commission')}
+                onClick={() => setBillingMode('startup')}
                 className={`px-6 py-3 rounded transition-all duration-200 ${
-                  billingMode === 'commission' 
-                    ? 'bg-primary text-white' 
+                  billingMode === 'startup' 
+                    ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white' 
                     : 'text-gray-600 hover:text-primary'
                 }`}
               >
-                Commission Pure
+                Je démarre
               </button>
               <button 
-                onClick={() => setBillingMode('hybrid')}
+                onClick={() => setBillingMode('established')}
                 className={`px-6 py-3 rounded transition-all duration-200 ${
-                  billingMode === 'hybrid' 
-                    ? 'bg-primary text-white' 
+                  billingMode === 'established' 
+                    ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white' 
                     : 'text-gray-600 hover:text-primary'
                 }`}
               >
-                Forfait + Commission
+                Je vends déjà
               </button>
             </div>
           </div>
           
           {/* Pricing Cards */}
           <motion.div 
-            className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto"
+            className={`grid ${billingMode === 'startup' ? 'md:grid-cols-1 max-w-2xl' : 'md:grid-cols-3 max-w-6xl'} gap-8 mx-auto`}
             key={billingMode}
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
           >
-            {billingMode === 'commission' ? (
-              <>
-                <PricingCard 
-                  title="Starter"
-                  subtitle="Pour tester sans risque"
-                  price="15-20%"
-                  priceDetail="de commission sur ventes"
-                  features={[
-                    "0€ d'avance",
-                    "Closers créolophones experts",
-                    "Rapport hebdomadaire",
-                    "30 jours d'essai satisfaction",
-                    "Sans engagement"
-                  ]}
-                  cta="Démarrer Gratuitement"
-                  highlighted={false}
-                />
-                <PricingCard 
-                  title="Scale"
-                  subtitle="Pour maximiser vos ventes"
-                  price="20-25%"
-                  priceDetail="de commission sur ventes"
-                  features={[
-                    "0€ d'avance",
-                    "Closers dédiés à votre secteur",
-                    "Dashboard temps réel",
-                    "Formation de vos scripts",
-                    "Support prioritaire 7j/7",
-                    "Garantie 8% conversion"
-                  ]}
-                  cta="Accélérer Ma Croissance"
-                  highlighted={true}
-                  badge="Plus Populaire"
-                />
-              </>
+            {billingMode === 'startup' ? (
+              <PricingCard 
+                title="PIONEER"
+                subtitle="Lancez-vous sans risque"
+                price="0€"
+                priceDetail="Aucun frais fixe"
+                commission="20%"
+                targetBasket="< 800€"
+                features={[
+                  "Idéal pour startups et nouveaux business",
+                  "Appels illimités inclus",
+                  "Closers experts locaux",
+                  "Dashboard temps réel",
+                  "Rapport hebdomadaire détaillé",
+                  "Formation de vos scripts incluse",
+                  "Support prioritaire 7j/7",
+                  "Garantie satisfaction 30 jours"
+                ]}
+                cta="Démarrer avec Pioneer"
+                highlighted={true}
+                badge="Offre Exclusive Startups"
+                validation={true}
+              />
             ) : (
               <>
                 <PricingCard 
-                  title="Hybrid Start"
-                  subtitle="Budget maîtrisé"
-                  price="800€"
-                  priceDetail="/mois + 8% commission"
+                  title="STARTER"
+                  subtitle="Petits paniers moyens"
+                  price="497€"
+                  priceDetail="par mois"
+                  commission="14%"
+                  targetBasket="800€ - 2000€"
                   features={[
-                    "Jusqu'à 200 appels/mois",
-                    "1 closer attitré",
+                    "Appels illimités",
+                    "Closer attitré expert",
+                    "Dashboard basique",
                     "Rapport hebdomadaire",
                     "Scripts optimisés",
-                    "Support email"
+                    "Support email prioritaire",
+                    "Rentable dès 6 ventes/mois"
                   ]}
-                  cta="Choisir Hybrid Start"
+                  cta="Choisir Starter"
                   highlighted={false}
                 />
                 <PricingCard 
-                  title="Hybrid Scale"
-                  subtitle="Volume important"
-                  price="1500€"
-                  priceDetail="/mois + 12% commission"
+                  title="GROWTH"
+                  subtitle="Paniers moyens élevés"
+                  price="1497€"
+                  priceDetail="par mois"
+                  commission="12%"
+                  targetBasket="2000€ - 5000€"
                   features={[
                     "Appels illimités",
-                    "2-3 closers dédiés",
-                    "Dashboard temps réel",
+                    "Équipe dédiée 2-3 closers",
+                    "Dashboard temps réel avancé",
+                    "Analytics détaillés",
                     "A/B testing scripts",
-                    "Support prioritaire 24/7",
-                    "Account manager dédié"
+                    "Support WhatsApp direct",
+                    "Formation équipe incluse",
+                    "Rentable dès 8 ventes/mois"
                   ]}
-                  cta="Passer à l'Échelle"
+                  cta="Accélérer avec Growth"
                   highlighted={true}
-                  badge="Meilleur ROI"
+                  badge="Plus Populaire"
+                />
+                <PricingCard 
+                  title="ENTERPRISE"
+                  subtitle="Gros paniers premium"
+                  price="2997€"
+                  priceDetail="par mois"
+                  commission="10%"
+                  targetBasket="> 5000€"
+                  features={[
+                    "Appels illimités",
+                    "Équipe dédiée 5+ closers",
+                    "Dashboard personnalisé",
+                    "BI & reporting sur mesure",
+                    "Stratégie dédiée",
+                    "Account manager dédié",
+                    "Formation continue",
+                    "Intégration CRM complète",
+                    "Rentable dès 11 ventes/mois"
+                  ]}
+                  cta="Passer à Enterprise"
+                  highlighted={false}
                 />
               </>
             )}
           </motion.div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={isVisible ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-12 text-center"
-          >
-            <p className="text-lg text-text-secondary mb-4">
-              💳 Paiement sécurisé • 🔒 Données protégées • 📞 Support local
-            </p>
-            <p className="text-sm text-text-secondary">
-              Pas de frais cachés. Annulation à tout moment.
-            </p>
-          </motion.div>
         </motion.div>
       </div>
     </section>

@@ -5,7 +5,9 @@ import Solution from '@/components/sections/Solution';
 import SocialProof from '@/components/sections/SocialProof';
 import Transformation from '@/components/sections/Transformation';
 import Process from '@/components/sections/Process';
+import Team from '@/components/sections/Team';
 import Pricing from '@/components/sections/Pricing';
+import ROICalculatorSection from '@/components/sections/ROICalculatorSection';
 import Urgency from '@/components/sections/Urgency';
 import Footer from '@/components/sections/Footer';
 
@@ -17,8 +19,10 @@ export default function Home() {
       <ProblemPremium />
       <Transformation />
       <SocialProof />
-      <Process />
       <Pricing />
+      <ROICalculatorSection />
+      <Process />
+      <Team />
       <Urgency />
       <Footer />
     </main>

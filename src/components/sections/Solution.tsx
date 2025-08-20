@@ -102,10 +102,10 @@ const Solution = () => {
               <div className="text-4xl">🎯</div>
               <div className="text-left">
                 <p className="text-2xl font-bold text-green-800">
-                  Résultat Garanti : 8% de Conversion Minimum
+                  Engagement Qualité
                 </p>
                 <p className="text-lg text-green-700">
-                  Ou on vous rembourse intégralement. Sans discussion.
+                  Satisfaction client au cœur de notre approche
                 </p>
               </div>
             </div>

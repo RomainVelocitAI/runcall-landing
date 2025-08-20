@@ -25,9 +25,9 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: 'Runcall - Multipliez vos ventes par 3 avec nos closers créolophones | La Réunion',
-  description: 'Service de closing téléphonique pour entreprises réunionnaises. Transformez vos leads en clients avec nos experts créolophones. 100% sur résultats.',
-  keywords: 'closing téléphonique réunion, closer créolophone, conversion leads, vente b2b réunion, prospection commerciale 974',
+  title: 'Runcall - Multipliez vos ventes par 3 avec nos closers experts | La Réunion',
+  description: 'Service de closing téléphonique pour entreprises réunionnaises. Transformez vos leads en clients avec nos experts locaux. 100% sur résultats.',
+  keywords: 'closing téléphonique réunion, closer expert, conversion leads, vente b2b réunion, prospection commerciale 974',
   authors: [{ name: 'Runcall' }],
   creator: 'Runcall',
   publisher: 'Runcall',
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'Runcall - Closing Téléphonique La Réunion',
-    description: 'Multipliez vos ventes par 3 avec nos closers créolophones',
+    description: 'Multipliez vos ventes par 3 avec nos closers experts',
     url: 'https://runcall.re',
     siteName: 'Runcall',
     images: [
@@ -55,7 +55,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Runcall - Closing Téléphonique La Réunion',
-    description: 'Multipliez vos ventes par 3 avec nos closers créolophones',
+    description: 'Multipliez vos ventes par 3 avec nos closers experts',
     images: ['/og-image.jpg'],
   },
   robots: {

@@ -142,8 +142,8 @@ const ContactForm = () => {
       <Button
         type="submit"
         size="xl"
-        variant="secondary"
-        className="w-full"
+        variant="default"
+        className="w-full bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-bold shadow-xl transform hover:scale-105 transition-all duration-200"
         disabled={isSubmitting}
       >
         {isSubmitting ? 'Envoi en cours...' : 'Recevoir Mon Audit Gratuit'}

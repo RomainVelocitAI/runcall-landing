@@ -22,7 +22,7 @@ export const TESTIMONIALS = [
     name: "Marie Lafleur", 
     company: "Formation Pro 974",
     avatar: "/testimonials/m-lafleur.jpg",
-    text: "L'équipe créolophone fait toute la différence. Nos prospects se sentent compris, le taux de closing a explosé.",
+    text: "L'équipe locale fait toute la différence. Nos prospects se sentent compris, le taux de closing a explosé.",
     rating: 5,
     sector: "formation"
   },
@@ -96,7 +96,7 @@ export const PROCESS_STEPS = [
   {
     step: 3,
     title: "Closers Dédiés",
-    description: "Attribution de closers créolophones experts dans votre domaine"
+    description: "Attribution de closers experts dans votre domaine"
   },
   {
     step: 4,
