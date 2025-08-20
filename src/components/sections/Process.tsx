@@ -12,6 +12,19 @@ const Process = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
 
+  // Map currentStep to timeline data structure
+  const getTimelinePosition = (step: number) => {
+    // We have 7 steps distributed across 4 time periods
+    // Jour 1: steps 0-1
+    // Semaine 1: steps 2-3  
+    // Semaine 2: steps 4-5
+    // En continu: step 6
+    if (step <= 1) return { time: "Jour 1", stepIndex: step };
+    if (step <= 3) return { time: "Semaine 1", stepIndex: step - 2 };
+    if (step <= 5) return { time: "Semaine 2", stepIndex: step - 4 };
+    return { time: "En continu", stepIndex: 0 };
+  };
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -138,6 +151,7 @@ const Process = () => {
             >
             <ArcTimeline
               key={currentStep}
+              defaultActiveStep={getTimelinePosition(currentStep)}
               data={[
                 {
                   time: "Jour 1",
