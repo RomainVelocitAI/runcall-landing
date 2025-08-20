@@ -11,7 +11,6 @@ const Process = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [currentStep, setCurrentStep] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
-  const timelineRef = useRef<any>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -88,9 +87,6 @@ const Process = () => {
                 onClick={() => {
                   const prevStep = currentStep > 0 ? currentStep - 1 : 6;
                   setCurrentStep(prevStep);
-                  if (timelineRef.current) {
-                    timelineRef.current.goToStep(prevStep);
-                  }
                 }}
                 className="group p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border-2 border-gray-200 hover:border-blue-500"
                 aria-label="Étape précédente"
@@ -107,9 +103,6 @@ const Process = () => {
                 onClick={() => {
                   const nextStep = currentStep < 6 ? currentStep + 1 : 0;
                   setCurrentStep(nextStep);
-                  if (timelineRef.current) {
-                    timelineRef.current.goToStep(nextStep);
-                  }
                 }}
                 className="group p-3 bg-white rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-110 border-2 border-gray-200 hover:border-blue-500"
                 aria-label="Étape suivante"
@@ -144,7 +137,6 @@ const Process = () => {
               } as React.CSSProperties}
             >
             <ArcTimeline
-              ref={timelineRef}
               data={[
                 {
                   time: "Jour 1",
