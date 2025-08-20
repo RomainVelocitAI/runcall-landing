@@ -90,7 +90,11 @@ const PricingCard = ({
         <Button
           variant={highlighted ? 'default' : 'outline'}
           size="lg"
-          className="w-full mt-auto"
+          className={`w-full mt-auto ${
+            highlighted 
+              ? 'bg-gradient-to-r from-blue-600 to-cyan-600 hover:from-blue-700 hover:to-cyan-700 text-white font-bold shadow-lg' 
+              : 'border-2 border-gray-300 text-gray-700 hover:border-blue-500 hover:text-blue-600 font-semibold'
+          }`}
           onClick={handleClick}
         >
           {cta}
