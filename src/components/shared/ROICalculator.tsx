@@ -35,17 +35,21 @@ const ROICalculator = () => {
     { name: 'ENTERPRISE', monthlyFee: 2997, commission: 0.10, minBasket: 5000, maxBasket: 999999, breakEvenSales: 11, color: 'orange' }
   ];
 
-  // Calculs honnêtes basés sur les leads non rappelés
-  const leadsNotCalled = Math.round(inputs.monthlyLeads * inputs.percentLeadsNotCalled / 100);
+  // Calculs basés sur les leads fantômes (ceux que vous ne rappelez pas ou trop tard)
+  const ghostLeads = Math.round(inputs.monthlyLeads * inputs.percentLeadsNotCalled / 100);
   const currentRevenue = inputs.currentMonthlySales * inputs.averageOrderValue;
   
-  // Potentiel de récupération (pas une promesse, juste le potentiel)
-  // Si on récupère 30% des leads non rappelés (estimation conservative)
-  const potentialRecoveryRate = 0.3;
-  const potentialNewSales = Math.round(leadsNotCalled * potentialRecoveryRate * 0.1); // 10% de conversion sur les leads récupérés
+  // RunCall rappelle 100% des leads fantômes rapidement et avec persévérance
+  // Taux de conversion réaliste sur les leads rappelés rapidement : 10-15%
+  const conversionRate = 0.10; // 10% de conversion (conservateur)
+  const potentialNewSales = Math.round(ghostLeads * conversionRate);
   const potentialAdditionalRevenue = potentialNewSales * inputs.averageOrderValue;
   
-  // Recommandation de formule basée sur le seuil de rentabilité
+  // Temps perdu à prospecter (15 min par lead en moyenne : appels, rappels, RDV...)
+  const timeWastedHours = Math.round((inputs.monthlyLeads * 15) / 60);
+  const timeWastedDays = Math.round(timeWastedHours / 8); // journées de 8h
+  
+  // Recommandation de formule basée sur la comparaison avec PIONEER
   const getRecommendedPlan = () => {
     const basket = inputs.averageOrderValue;
     const currentSales = inputs.currentMonthlySales;
@@ -55,31 +59,54 @@ const ROICalculator = () => {
       basket >= plan.minBasket && basket <= plan.maxBasket
     );
     
-    // Calculer le seuil de rentabilité pour chaque plan
-    const plansWithBreakeven = eligiblePlans.map(plan => {
-      // Combien de ventes supplémentaires pour rentabiliser ?
-      const breakEvenSales = plan.monthlyFee > 0 
-        ? Math.ceil(plan.monthlyFee / (basket * (1 - plan.commission)))
-        : 0;
+    // Calculer les métriques pour chaque plan
+    const plansWithMetrics = eligiblePlans.map(plan => {
+      // Coût avec PIONEER (référence sans abonnement)
+      const costWithPioneer = currentSales * basket * 0.20;
       
+      // Coût avec ce plan
       const totalMonthlyCost = plan.monthlyFee + (currentSales * basket * plan.commission);
+      
+      // Économie par rapport à PIONEER (positif = économie, négatif = surcoût)
+      const savingsVsPioneer = costWithPioneer - totalMonthlyCost;
+      
+      // Point de rentabilité : à partir de combien de ventes ce plan devient moins cher que PIONEER
+      // Si commission >= 20%, ce plan n'est jamais rentable par rapport à PIONEER
+      const breakEvenVsPioneer = plan.commission >= 0.20 
+        ? Infinity 
+        : plan.monthlyFee / (basket * (0.20 - plan.commission));
+      
+      // Est-ce déjà rentable avec les ventes actuelles ?
+      const isAlreadyProfitable = currentSales >= breakEvenVsPioneer;
       
       return {
         ...plan,
-        breakEvenSales,
         totalMonthlyCost,
-        costPerSale: currentSales > 0 ? Math.round(totalMonthlyCost / currentSales) : 0
+        costPerSale: currentSales > 0 ? Math.round(totalMonthlyCost / currentSales) : 0,
+        savingsVsPioneer: Math.round(savingsVsPioneer),
+        breakEvenVsPioneer: Math.ceil(breakEvenVsPioneer),
+        isAlreadyProfitable
       };
     });
     
-    // Recommander basé sur le volume actuel
-    if (currentSales < 5) {
-      return plansWithBreakeven.find(p => p.name === 'PIONEER') || plansWithBreakeven[0];
+    // Recommander basé sur les économies réelles
+    if (currentSales === 0) {
+      // Sans ventes, PIONEER est le meilleur choix (pas d'abonnement)
+      return plansWithMetrics.find(p => p.name === 'PIONEER') || plansWithMetrics[0];
     }
     
-    // Sinon, prendre celui avec le meilleur coût par vente
-    return plansWithBreakeven.reduce((best, current) => 
-      current.costPerSale < best.costPerSale ? current : best
+    // Avec des ventes, prendre celui qui fait le plus d'économies par rapport à PIONEER
+    // Mais ne pas recommander un plan avec un surcoût sauf si c'est PIONEER lui-même
+    const profitablePlans = plansWithMetrics.filter(p => p.savingsVsPioneer >= 0 || p.name === 'PIONEER');
+    
+    if (profitablePlans.length === 0) {
+      // Si aucun plan n'est rentable, recommander PIONEER
+      return plansWithMetrics.find(p => p.name === 'PIONEER') || plansWithMetrics[0];
+    }
+    
+    // Recommander celui avec les meilleures économies
+    return profitablePlans.reduce((best, current) => 
+      current.savingsVsPioneer > best.savingsVsPioneer ? current : best
     );
   };
   
@@ -119,7 +146,7 @@ const ROICalculator = () => {
         
         <div>
           <label className="flex justify-between mb-2">
-            <span className="font-medium">Leads non rappelés</span>
+            <span className="font-medium">Leads fantômes</span>
             <span className="font-bold text-primary">{inputs.percentLeadsNotCalled}%</span>
           </label>
           <input 
@@ -211,40 +238,76 @@ const ROICalculator = () => {
           
           <div className="grid grid-cols-2 gap-4 mb-4">
             <div>
-              <p className="text-sm text-gray-600">Seuil de rentabilité</p>
+              <p className="text-sm text-gray-600">Par rapport à PIONEER</p>
               <p className="text-xl font-bold text-gray-900">
-                {recommendedPlan.breakEvenSales} vente{recommendedPlan.breakEvenSales > 1 ? 's' : ''}
-                <span className="text-sm font-normal text-gray-600 block">
-                  supplémentaire{recommendedPlan.breakEvenSales > 1 ? 's' : ''} / mois
-                </span>
+                {recommendedPlan.savingsVsPioneer > 0 ? (
+                  <span className="text-green-600">
+                    -{recommendedPlan.savingsVsPioneer}€
+                    <span className="text-sm font-normal text-gray-600 block">
+                      d'économie / mois
+                    </span>
+                  </span>
+                ) : recommendedPlan.savingsVsPioneer < 0 ? (
+                  <span className="text-red-600">
+                    +{Math.abs(recommendedPlan.savingsVsPioneer)}€
+                    <span className="text-sm font-normal text-gray-600 block">
+                      de surcoût / mois
+                    </span>
+                  </span>
+                ) : (
+                  <span>
+                    Identique
+                    <span className="text-sm font-normal text-gray-600 block">
+                      (formule de base)
+                    </span>
+                  </span>
+                )}
               </p>
             </div>
             <div>
-              <p className="text-sm text-gray-600">Coût par vente</p>
+              <p className="text-sm text-gray-600">Rentabilité</p>
               <p className="text-xl font-bold text-gray-900">
-                {recommendedPlan.costPerSale}€
-                <span className="text-sm font-normal text-gray-600 block">
-                  tout compris
-                </span>
+                {recommendedPlan.isAlreadyProfitable ? (
+                  <span className="text-green-600">
+                    Déjà rentable
+                    <span className="text-sm font-normal text-gray-600 block">
+                      avec vos {inputs.currentMonthlySales} ventes
+                    </span>
+                  </span>
+                ) : recommendedPlan.name === 'PIONEER' ? (
+                  <span>
+                    Sans risque
+                    <span className="text-sm font-normal text-gray-600 block">
+                      pay per use
+                    </span>
+                  </span>
+                ) : (
+                  <span>
+                    Dès {recommendedPlan.breakEvenVsPioneer} ventes
+                    <span className="text-sm font-normal text-gray-600 block">
+                      par mois au total
+                    </span>
+                  </span>
+                )}
               </p>
             </div>
           </div>
           
           <div className="text-sm text-gray-700">
             {recommendedPlan.name === 'PIONEER' && (
-              <p>Parfait pour débuter ! Aucun risque, vous ne payez que sur les ventes réalisées.</p>
+              <p>Parfait pour débuter ! RunCall rappelle vos {ghostLeads} leads fantômes/mois sans risque.</p>
             )}
             {recommendedPlan.name === 'STARTER' && (
-              <p>Avec votre panier moyen de {inputs.averageOrderValue}€ et {inputs.currentMonthlySales} ventes/mois, 
-              vous économisez {((0.20 - recommendedPlan.commission) * 100).toFixed(0)}% de commission par rapport à Pioneer.</p>
+              <p>Récupérez {potentialNewSales} ventes/mois sur vos {ghostLeads} leads fantômes, 
+              tout en économisant {((0.20 - recommendedPlan.commission) * 100).toFixed(0)}% de commission !</p>
             )}
             {recommendedPlan.name === 'GROWTH' && (
-              <p>Idéal pour votre volume ! Commission optimisée à {(recommendedPlan.commission * 100).toFixed(0)}% 
-              avec une équipe dédiée de 2-3 closers experts.</p>
+              <p>Commission à {(recommendedPlan.commission * 100).toFixed(0)}% seulement ! 
+              Équipe dédiée qui rappelle 100% de vos leads rapidement.</p>
             )}
             {recommendedPlan.name === 'ENTERPRISE' && (
-              <p>La solution premium avec {(recommendedPlan.commission * 100).toFixed(0)}% 
-              de commission et un accompagnement complet sur mesure.</p>
+              <p>Solution premium : {(recommendedPlan.commission * 100).toFixed(0)}% de commission, 
+              {timeWastedHours}h/mois libérées, {potentialNewSales} ventes récupérées.</p>
             )}
           </div>
         </motion.div>
@@ -261,46 +324,56 @@ const ROICalculator = () => {
         
         <div className="space-y-3 mb-4">
           <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">Leads non rappelés:</span>
-            <span className="font-bold text-red-600">{leadsNotCalled} ({inputs.percentLeadsNotCalled}%)</span>
+            <span className="text-sm text-gray-600">Leads fantômes:</span>
+            <span className="font-bold text-red-600">{ghostLeads} /mois</span>
           </div>
           <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">CA mensuel:</span>
+            <span className="text-sm text-gray-600">Temps perdu à prospecter:</span>
+            <span className="font-bold text-orange-600">{timeWastedHours}h ({timeWastedDays} jours)</span>
+          </div>
+          <div className="flex justify-between items-center">
+            <span className="text-sm text-gray-600">CA mensuel actuel:</span>
             <span className="font-bold">{currentRevenue.toLocaleString('fr-FR')}€</span>
-          </div>
-          <div className="flex justify-between items-center">
-            <span className="text-sm text-gray-600">Ventes actuelles:</span>
-            <span className="font-bold">{inputs.currentMonthlySales} × {inputs.averageOrderValue}€</span>
           </div>
         </div>
         
         <div className="border-t pt-4">
-          <p className="text-sm text-gray-600 mb-2">Potentiel de récupération estimé</p>
+          <p className="text-sm text-gray-600 mb-2">🚀 Ce que RunCall récupère pour vous</p>
           <div className="bg-white rounded-lg p-4">
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm">Si nous récupérons 30% de ces leads perdus :</span>
-              <span className="font-bold">{Math.round(leadsNotCalled * 0.3)} leads</span>
+              <span className="text-sm">Leads fantômes rappelés rapidement :</span>
+              <span className="font-bold text-green-600">{ghostLeads} leads</span>
             </div>
             <div className="flex items-center justify-between mb-2">
-              <span className="text-sm">Avec 10% de conversion :</span>
-              <span className="font-bold">{potentialNewSales} ventes</span>
+              <span className="text-sm">Persévérance jusqu'au contact (10% conversion) :</span>
+              <span className="font-bold text-green-600">{potentialNewSales} ventes</span>
+            </div>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-sm">Temps libéré pour vous :</span>
+              <span className="font-bold text-blue-600">{timeWastedHours}h/mois</span>
             </div>
             <div className="flex items-center justify-between pt-2 border-t">
-              <span className="font-medium">Potentiel de CA additionnel :</span>
+              <span className="font-medium">CA additionnel potentiel :</span>
               <span className="text-xl font-bold text-green-600">
                 +{potentialAdditionalRevenue.toLocaleString('fr-FR')}€/mois
               </span>
             </div>
           </div>
           
-          {leadsNotCalled > 20 && (
-            <p className="text-sm text-orange-600 mt-3 font-medium">
-              ⚠️ Vous perdez actuellement {leadsNotCalled} opportunités commerciales par mois
-            </p>
+          {ghostLeads > 20 && (
+            <div className="mt-3 p-2 bg-red-50 border border-red-200 rounded">
+              <p className="text-sm text-red-700 font-medium">
+                ⚠️ Vous perdez {ghostLeads} leads fantômes chaque mois !
+              </p>
+              <p className="text-xs text-red-600 mt-1">
+                Ces prospects disparaissent car rappelés trop tard ou pas du tout.
+                RunCall les rappelle rapidement et avec persévérance.
+              </p>
+            </div>
           )}
         </div>
         
-        {potentialNewSales >= 3 && (
+        {potentialNewSales >= 3 && recommendedPlan && !recommendedPlan.isAlreadyProfitable && recommendedPlan.name !== 'PIONEER' && (
           <motion.div
             initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -308,8 +381,15 @@ const ROICalculator = () => {
             className="mt-4 p-3 bg-yellow-100 border border-yellow-300 rounded-lg"
           >
             <p className="text-yellow-800 font-semibold text-center">
-              Avec seulement {potentialNewSales} ventes supplémentaires, 
-              la formule {recommendedPlan.name} devient rentable !
+              {inputs.currentMonthlySales + potentialNewSales >= recommendedPlan.breakEvenVsPioneer ? (
+                <>Avec {potentialNewSales} ventes récupérées, vous économiserez 
+                {Math.round((inputs.currentMonthlySales + potentialNewSales) * inputs.averageOrderValue * 0.20 - 
+                (recommendedPlan.monthlyFee + (inputs.currentMonthlySales + potentialNewSales) * inputs.averageOrderValue * recommendedPlan.commission))}€/mois !</>
+              ) : (
+                <>Avec les {potentialNewSales} ventes récupérées sur vos leads fantômes, 
+                {recommendedPlan.name} sera {recommendedPlan.breakEvenVsPioneer - inputs.currentMonthlySales - potentialNewSales <= 0 ? 'déjà rentable !' : 
+                `à ${recommendedPlan.breakEvenVsPioneer - inputs.currentMonthlySales - potentialNewSales} vente${recommendedPlan.breakEvenVsPioneer - inputs.currentMonthlySales - potentialNewSales > 1 ? 's' : ''} de la rentabilité`}</>
+              )}
             </p>
           </motion.div>
         )}
@@ -349,9 +429,14 @@ const ROICalculator = () => {
               const monthlyFee = plan.monthlyFee;
               const commissionCost = inputs.currentMonthlySales * inputs.averageOrderValue * plan.commission;
               const totalCost = monthlyFee + commissionCost;
-              const breakEvenSales = monthlyFee > 0 
-                ? Math.ceil(monthlyFee / (inputs.averageOrderValue * (1 - plan.commission)))
-                : 0;
+              
+              // Comparaison avec PIONEER
+              const costWithPioneer = inputs.currentMonthlySales * inputs.averageOrderValue * 0.20;
+              const savingsVsPioneer = costWithPioneer - totalCost;
+              const breakEvenVsPioneer = plan.commission >= 0.20 
+                ? Infinity 
+                : plan.monthlyFee / (inputs.averageOrderValue * (0.20 - plan.commission));
+              const isAlreadyProfitable = inputs.currentMonthlySales >= breakEvenVsPioneer;
               
               return (
                 <div 
@@ -411,16 +496,34 @@ const ROICalculator = () => {
                       </div>
                     </div>
                     
-                    {/* Seuil de rentabilité */}
+                    {/* Comparaison avec PIONEER */}
                     {isEligible && (
                       <div className="mt-3 pt-3 border-t border-gray-200">
-                        <p className="text-xs text-center">
-                          <span className="font-medium text-gray-700">Rentable dès</span>
-                          <br />
-                          <span className="font-bold text-sm text-green-600">
-                            {breakEvenSales} vente{breakEvenSales > 1 ? 's' : ''} en plus
-                          </span>
-                        </p>
+                        {plan.name === 'PIONEER' ? (
+                          <p className="text-xs text-center">
+                            <span className="font-medium text-gray-700">Formule de base</span>
+                            <br />
+                            <span className="font-bold text-sm text-blue-600">
+                              Sans engagement
+                            </span>
+                          </p>
+                        ) : isAlreadyProfitable ? (
+                          <p className="text-xs text-center">
+                            <span className="font-medium text-gray-700">Économie vs PIONEER</span>
+                            <br />
+                            <span className="font-bold text-sm text-green-600">
+                              -{Math.round(savingsVsPioneer)}€/mois
+                            </span>
+                          </p>
+                        ) : (
+                          <p className="text-xs text-center">
+                            <span className="font-medium text-gray-700">Rentable dès</span>
+                            <br />
+                            <span className="font-bold text-sm text-orange-600">
+                              {Math.ceil(breakEvenVsPioneer)} ventes/mois
+                            </span>
+                          </p>
+                        )}
                       </div>
                     )}
 
@@ -441,8 +544,14 @@ const ROICalculator = () => {
         {/* Note explicative */}
         <div className="mt-4 p-3 bg-yellow-50 border border-yellow-200 rounded-lg">
           <p className="text-xs text-yellow-800">
-            💡 <strong>Conseil :</strong> La formule recommandée optimise vos coûts selon votre panier moyen actuel de {inputs.averageOrderValue}€. 
-            Vous pouvez choisir n'importe quelle formule éligible selon vos préférences.
+            💡 <strong>La vraie valeur de RunCall :</strong> Nous rappelons 100% de vos {ghostLeads} leads fantômes rapidement, 
+            avec persévérance jusqu'au contact. Résultat : {potentialNewSales} ventes supplémentaires et {timeWastedHours}h de prospection économisées !
+            {inputs.currentMonthlySales > 0 && (
+              <span className="block mt-1 font-semibold">
+                Impact total : {inputs.currentMonthlySales} ventes actuelles + {potentialNewSales} ventes récupérées = 
+                {inputs.currentMonthlySales + potentialNewSales} ventes/mois, soit {((inputs.currentMonthlySales + potentialNewSales) * inputs.averageOrderValue).toLocaleString('fr-FR')}€ de CA.
+              </span>
+            )}
           </p>
         </div>
       </motion.div>
