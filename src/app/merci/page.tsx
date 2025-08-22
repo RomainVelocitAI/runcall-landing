@@ -83,30 +83,16 @@ export default function MerciPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.6 }}
-          className="space-y-4"
+          className="flex justify-center"
         >
-          <p className="text-sm text-text-secondary">
-            En attendant, découvrez nos ressources gratuites :
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              variant="outline"
-              asChild
-            >
-              <a href="/guide-closing.pdf" download>
-                📚 Guide du Closing Réussi
-              </a>
-            </Button>
-            <Button
-              variant="outline"
-              asChild
-            >
-              <a href="/">
-                🏠 Retour à l&apos;accueil
-              </a>
-            </Button>
-          </div>
+          <Button
+            variant="outline"
+            asChild
+          >
+            <a href="/">
+              🏠 Retour à l&apos;accueil
+            </a>
+          </Button>
         </motion.div>
         
         <motion.div
