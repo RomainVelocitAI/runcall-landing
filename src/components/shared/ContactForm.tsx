@@ -16,8 +16,10 @@ import {
   TrendingUp,
   CheckCircle,
   Sparkles,
-  ArrowRight
+  ArrowRight,
+  ChevronRight
 } from 'lucide-react';
+import { AnimatedSubscribeButton } from '@/components/magicui/animated-subscribe-button';
 
 const formSchema = z.object({
   company: z.string().min(2, 'Nom d\'entreprise requis'),
@@ -350,37 +352,27 @@ const ContactForm = () => {
       <motion.div
         whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
+        className="w-full"
       >
-        <button
-          type="submit"
-          disabled={isSubmitting}
-          className={`relative w-full py-5 px-8 rounded-2xl font-bold text-lg transition-all duration-300 overflow-hidden group ${
-            isSubmitting 
-              ? 'bg-gray-400 cursor-not-allowed' 
-              : 'bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 hover:from-blue-700 hover:via-blue-600 hover:to-cyan-600 text-white shadow-lg hover:shadow-2xl'
-          }`}
+        <AnimatedSubscribeButton
+          className="w-full h-14 bg-gradient-to-r from-blue-600 via-blue-500 to-cyan-500 hover:from-blue-700 hover:via-blue-600 hover:to-cyan-600 text-white font-bold text-lg shadow-lg hover:shadow-2xl transition-all duration-300"
+          subscribeStatus={isSubmitting}
+          onClick={handleSubmit(onSubmit)}
+          type="button"
         >
-          <div className="relative flex items-center justify-center gap-3">
-            {isSubmitting ? (
-              <>
-                <motion.div
-                  animate={{ rotate: 360 }}
-                  transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
-                  className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"
-                />
-                <span>Envoi en cours...</span>
-              </>
-            ) : (
-              <>
-                <span>Recevoir Mon Audit Gratuit</span>
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </>
-            )}
-          </div>
-          {!isSubmitting && (
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-700" />
-          )}
-        </button>
+          <span className="group inline-flex items-center">
+            Recevoir Mon Audit Gratuit
+            <ChevronRight className="ml-2 size-5 transition-transform duration-300 group-hover:translate-x-1" />
+          </span>
+          <span className="group inline-flex items-center">
+            <motion.div
+              animate={{ rotate: 360 }}
+              transition={{ duration: 1, repeat: Infinity, ease: "linear" }}
+              className="mr-3 w-5 h-5 border-2 border-white border-t-transparent rounded-full"
+            />
+            Envoi en cours...
+          </span>
+        </AnimatedSubscribeButton>
       </motion.div>
       
       {/* Privacy Notice */}

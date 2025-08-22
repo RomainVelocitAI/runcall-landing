@@ -5,6 +5,8 @@ import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/Button';
 import ContactForm from '@/components/shared/ContactForm';
 import { event } from '@/lib/analytics';
+import { MagicCard } from '@/components/magicui/magic-card';
+import { BorderBeam } from '@/components/magicui/border-beam';
 
 const Urgency = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -50,12 +52,21 @@ const Urgency = () => {
             id="contact-form"
             className="max-w-2xl mx-auto"
           >
-            <div className="relative">
-              {/* Decorative gradient background */}
-              <div className="absolute inset-0 bg-gradient-to-br from-blue-100 via-cyan-50 to-teal-50 rounded-3xl blur-3xl opacity-50" />
-              
-              {/* Main form container */}
-              <div className="relative bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-10 border border-gray-100">
+            <MagicCard
+              className="relative cursor-pointer shadow-2xl rounded-3xl"
+              gradientSize={200}
+              gradientColor="#60A5FA"
+              gradientOpacity={0.3}
+            >
+              <div className="relative bg-white/95 backdrop-blur-sm rounded-3xl p-10">
+                <BorderBeam 
+                  size={250} 
+                  duration={12} 
+                  delay={9}
+                  colorFrom="#3B82F6"
+                  colorTo="#06B6D4"
+                />
+                
                 <div className="text-center mb-8">
                   <motion.div
                     initial={{ scale: 0 }}
@@ -101,7 +112,7 @@ const Urgency = () => {
                   </div>
                 </div>
               </div>
-            </div>
+            </MagicCard>
           </motion.div>
 
         </motion.div>

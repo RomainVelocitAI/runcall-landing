@@ -9,7 +9,13 @@
       "Bash(git commit:*)",
       "Bash(git push:*)",
       "Bash(npm run dev:*)",
-      "Bash(npm install)"
+      "Bash(npm install)",
+      "mcp___magicuidesign_mcp__getUIComponents",
+      "mcp___magicuidesign_mcp__getSpecialEffects",
+      "mcp___magicuidesign_mcp__getButtons",
+      "Bash(npx shadcn@latest add \"https://magicui.design/r/border-beam\")",
+      "Bash(npx shadcn@latest add \"https://magicui.design/r/animated-subscribe-button\")",
+      "Bash(npx shadcn@latest add \"https://magicui.design/r/sparkles-text\")"
     ],
     "deny": [],
     "ask": []
