@@ -108,7 +108,7 @@ export default function MerciPage() {
             href={`tel:${process.env.NEXT_PUBLIC_PHONE}`}
             className="text-xl font-semibold text-primary hover:text-primary/80 transition"
           >
-            {process.env.NEXT_PUBLIC_PHONE_DISPLAY || '02 62 12 34 56'}
+            {process.env.NEXT_PUBLIC_PHONE_DISPLAY || '02 62 02 51 02'}
           </a>
         </motion.div>
       </motion.div>

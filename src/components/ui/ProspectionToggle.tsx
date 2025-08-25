@@ -36,9 +36,9 @@ export default function ProspectionToggle({ onToggle }: ProspectionToggleProps) 
               className="text-gray-700"
             >
               <div className="flex items-center gap-2">
-                <span className={!isRuncallEnabled ? 'font-semibold' : ''}>Sans RunCALL</span>
+                <span className={!isRuncallEnabled ? 'font-semibold' : ''}>Sans RunCall</span>
                 <span className="text-gray-400">|</span>
-                <span className={isRuncallEnabled ? 'font-semibold text-primary' : ''}>Avec RunCALL</span>
+                <span className={isRuncallEnabled ? 'font-semibold text-primary' : ''}>Avec RunCall</span>
               </div>
             </Switch>
             <div className="text-sm text-gray-600 mt-2">

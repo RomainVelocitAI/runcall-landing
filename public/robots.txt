@@ -1,0 +1,41 @@
+# robots.txt pour runcall.re
+# Optimisé selon le guide SEO 2025
+
+User-agent: *
+Allow: /
+
+# Bloquer les pages temporaires et de remerciement
+Disallow: /merci
+Disallow: /api/
+Disallow: /*.json$
+
+# Autoriser CSS/JS critiques
+Allow: /*.css
+Allow: /*.js
+Allow: /images/
+
+# Crawler Google
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+# Crawler Bing
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 1
+
+# Bloquage des bots malveillants
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Sitemaps
+Sitemap: https://runcall.re/sitemap.xml

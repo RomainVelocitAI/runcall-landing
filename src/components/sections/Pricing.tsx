@@ -105,7 +105,6 @@ const PricingCard = ({
 };
 
 const Pricing = () => {
-  const [billingMode, setBillingMode] = useState<'startup' | 'established'>('startup');
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   
@@ -145,10 +144,10 @@ const Pricing = () => {
           className="max-w-6xl mx-auto"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-center mb-4">
-            Une Formule <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">Adaptée à Votre Stade</span>
+            Une Formule <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">Pour Chaque Entreprise</span>
           </h2>
           <p className="text-xl text-text-secondary text-center mb-8">
-            Startup ou entreprise établie, nous avons la solution pour vous
+            Startup ou entreprise établie, découvrez nos 4 formules adaptées
           </p>
           
           {/* Calculateur CTA */}
@@ -164,128 +163,97 @@ const Pricing = () => {
             </button>
           </div>
           
-          {/* Toggle */}
-          <div className="flex justify-center mb-12">
-            <div className="bg-white rounded-lg shadow-md p-1 flex">
-              <button 
-                onClick={() => setBillingMode('startup')}
-                className={`px-6 py-3 rounded transition-all duration-200 ${
-                  billingMode === 'startup' 
-                    ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white' 
-                    : 'text-gray-600 hover:text-primary'
-                }`}
-              >
-                Je démarre
-              </button>
-              <button 
-                onClick={() => setBillingMode('established')}
-                className={`px-6 py-3 rounded transition-all duration-200 ${
-                  billingMode === 'established' 
-                    ? 'bg-gradient-to-r from-blue-600 to-cyan-600 text-white' 
-                    : 'text-gray-600 hover:text-primary'
-                }`}
-              >
-                Je vends déjà
-              </button>
-            </div>
-          </div>
           
           {/* Pricing Cards */}
           <motion.div 
-            className={`grid ${billingMode === 'startup' ? 'md:grid-cols-1 max-w-2xl' : 'md:grid-cols-3 max-w-6xl'} gap-8 mx-auto`}
-            key={billingMode}
+            className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mx-auto"
             initial={{ opacity: 0, scale: 0.95 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.3 }}
           >
-            {billingMode === 'startup' ? (
-              <PricingCard 
-                title="PIONEER"
-                subtitle="Lancez-vous sans risque"
-                price="0€"
-                priceDetail="Aucun frais fixe"
-                commission="20%"
-                targetBasket="< 800€"
-                features={[
-                  "Idéal pour startups et nouveaux business",
-                  "Appels illimités inclus",
-                  "Closers experts locaux",
-                  "Dashboard temps réel",
-                  "Rapport hebdomadaire détaillé",
-                  "Formation de vos scripts incluse",
-                  "Support prioritaire 7j/7",
-                  "Garantie satisfaction 30 jours"
-                ]}
-                cta="Démarrer avec Pioneer"
-                highlighted={true}
-                badge="Offre Exclusive Startups"
-                validation={true}
-              />
-            ) : (
-              <>
-                <PricingCard 
-                  title="STARTER"
-                  subtitle="Petits paniers moyens"
-                  price="497€"
-                  priceDetail="par mois"
-                  commission="14%"
-                  targetBasket="800€ - 2000€"
-                  features={[
-                    "Appels illimités",
-                    "Closer attitré expert",
-                    "Dashboard basique",
-                    "Rapport hebdomadaire",
-                    "Scripts optimisés",
-                    "Support email prioritaire",
-                    "Rentable dès 6 ventes/mois"
-                  ]}
-                  cta="Choisir Starter"
-                  highlighted={false}
-                />
-                <PricingCard 
-                  title="GROWTH"
-                  subtitle="Paniers moyens élevés"
-                  price="1497€"
-                  priceDetail="par mois"
-                  commission="12%"
-                  targetBasket="2000€ - 5000€"
-                  features={[
-                    "Appels illimités",
-                    "Équipe dédiée 2-3 closers",
-                    "Dashboard temps réel avancé",
-                    "Analytics détaillés",
-                    "A/B testing scripts",
-                    "Support WhatsApp direct",
-                    "Formation équipe incluse",
-                    "Rentable dès 8 ventes/mois"
-                  ]}
-                  cta="Accélérer avec Growth"
-                  highlighted={true}
-                  badge="Plus Populaire"
-                />
-                <PricingCard 
-                  title="ENTERPRISE"
-                  subtitle="Gros paniers premium"
-                  price="2997€"
-                  priceDetail="par mois"
-                  commission="10%"
-                  targetBasket="> 5000€"
-                  features={[
-                    "Appels illimités",
-                    "Équipe dédiée 5+ closers",
-                    "Dashboard personnalisé",
-                    "BI & reporting sur mesure",
-                    "Stratégie dédiée",
-                    "Account manager dédié",
-                    "Formation continue",
-                    "Intégration CRM complète",
-                    "Rentable dès 11 ventes/mois"
-                  ]}
-                  cta="Passer à Enterprise"
-                  highlighted={false}
-                />
-              </>
-            )}
+            <PricingCard 
+              title="PIONEER"
+              subtitle="Startups"
+              price="0€"
+              priceDetail="Aucun frais fixe"
+              commission="20%"
+              targetBasket="< 800€"
+              features={[
+                "Idéal pour startups",
+                "Appels illimités",
+                "Closers experts locaux",
+                "Dashboard temps réel",
+                "Rapport hebdomadaire",
+                "Formation scripts incluse",
+                "Support prioritaire 7j/7",
+                "Garantie satisfaction 30j"
+              ]}
+              cta="Démarrer avec Pioneer"
+              highlighted={false}
+              badge="Spécial Startups"
+              validation={true}
+            />
+            <PricingCard 
+              title="STARTER"
+              subtitle="Petits paniers"
+              price="497€"
+              priceDetail="par mois"
+              commission="14%"
+              targetBasket="800€ - 2000€"
+              features={[
+                "Appels illimités",
+                "Closer attitré expert",
+                "Dashboard basique",
+                "Rapport hebdomadaire",
+                "Scripts optimisés",
+                "Support email prioritaire",
+                "Rentable dès 6 ventes/mois"
+              ]}
+              cta="Choisir Starter"
+              highlighted={false}
+            />
+            <PricingCard 
+              title="GROWTH"
+              subtitle="Paniers moyens"
+              price="1497€"
+              priceDetail="par mois"
+              commission="12%"
+              targetBasket="2000€ - 5000€"
+              features={[
+                "Appels illimités",
+                "Équipe 2-3 closers",
+                "Dashboard avancé",
+                "Analytics détaillés",
+                "A/B testing scripts",
+                "Support WhatsApp",
+                "Formation équipe",
+                "Rentable dès 8 ventes/mois"
+              ]}
+              cta="Accélérer avec Growth"
+              highlighted={true}
+              badge="Plus Populaire"
+            />
+            <PricingCard 
+              title="ENTERPRISE"
+              subtitle="Gros paniers"
+              price="2997€"
+              priceDetail="par mois"
+              commission="10%"
+              targetBasket="> 5000€"
+              features={[
+                "Appels illimités",
+                "Équipe 5+ closers",
+                "Dashboard personnalisé",
+                "BI & reporting",
+                "Stratégie dédiée",
+                "Account manager",
+                "Formation continue",
+                "Intégration CRM",
+                "Rentable dès 11 ventes/mois"
+              ]}
+              cta="Passer à Enterprise"
+              highlighted={false}
+            />
           </motion.div>
 
         </motion.div>

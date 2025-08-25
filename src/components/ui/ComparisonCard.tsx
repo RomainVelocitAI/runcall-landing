@@ -35,7 +35,7 @@ export default function ComparisonCard({ onToggle }: ComparisonCardProps) {
       {/* Toggle Switch */}
       <div className="flex items-center gap-6">
         <span className={`text-xl font-semibold transition-all duration-300 ${!isActive ? 'text-white' : 'text-white/50'}`}>
-          Sans RunCALL
+          Sans RunCall
         </span>
         
         <button
@@ -62,7 +62,7 @@ export default function ComparisonCard({ onToggle }: ComparisonCardProps) {
         </button>
 
         <span className={`text-xl font-semibold transition-all duration-300 ${isActive ? 'text-white' : 'text-white/50'}`}>
-          Avec RunCALL
+          Avec RunCall
         </span>
       </div>
 
@@ -106,7 +106,7 @@ export default function ComparisonCard({ onToggle }: ComparisonCardProps) {
               className="bg-gradient-to-br from-emerald-900/20 to-emerald-800/20 backdrop-blur-xl rounded-2xl p-8 border border-emerald-500/20"
             >
               <h3 className="text-2xl font-bold text-white mb-6 text-center">
-                Votre Solution RunCALL
+                Votre Solution RunCall
               </h3>
               <div className="grid gap-4">
                 {avecRuncall.map((text, index) => (

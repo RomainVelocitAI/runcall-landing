@@ -75,7 +75,7 @@ export default function RunCallBenefitsCard({ isActive = false }: RunCallBenefit
             <div className="relative p-8 pb-0">
               <div className="flex items-center justify-between mb-8">
                 <div>
-                  <h3 className="text-2xl font-bold text-white">Mode RunCALL Désactivé</h3>
+                  <h3 className="text-2xl font-bold text-white">Mode RunCall Désactivé</h3>
                   <p className="text-red-400 text-sm font-medium">Pertes en cours...</p>
                 </div>
                 <div className="flex items-center gap-2">
@@ -157,14 +157,14 @@ export default function RunCallBenefitsCard({ isActive = false }: RunCallBenefit
                   <div className="relative w-16 h-16 bg-white rounded-2xl p-2 shadow-lg">
                     <Image 
                       src="/logo.png" 
-                      alt="RunCALL" 
+                      alt="RunCall" 
                       width={48} 
                       height={48} 
                       className="object-contain"
                     />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold text-white">RunCALL Activé</h3>
+                    <h3 className="text-2xl font-bold text-white">RunCall Activé</h3>
                     <p className="text-cyan-300 text-sm">Transformation en cours...</p>
                   </div>
                 </div>
@@ -214,7 +214,7 @@ export default function RunCallBenefitsCard({ isActive = false }: RunCallBenefit
               <div className="bg-gradient-to-r from-cyan-600/20 to-blue-600/20 rounded-xl p-6 border border-cyan-500/30">
                 <div className="flex flex-col md:flex-row items-center justify-between gap-4">
                   <div>
-                    <p className="text-white font-bold text-lg">Votre Potentiel avec RunCALL</p>
+                    <p className="text-white font-bold text-lg">Votre Potentiel avec RunCall</p>
                     <p className="text-cyan-300 text-sm">Croissance commerciale optimisée</p>
                   </div>
                   <div className="flex items-center gap-3">

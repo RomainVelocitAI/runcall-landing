@@ -15,7 +15,9 @@
       "mcp___magicuidesign_mcp__getButtons",
       "Bash(npx shadcn@latest add \"https://magicui.design/r/border-beam\")",
       "Bash(npx shadcn@latest add \"https://magicui.design/r/animated-subscribe-button\")",
-      "Bash(npx shadcn@latest add \"https://magicui.design/r/sparkles-text\")"
+      "Bash(npx shadcn@latest add \"https://magicui.design/r/sparkles-text\")",
+      "Read(/D:\\bonnes_pratiques\\context/**)",
+      "Read(/D:\\bonnes_pratiques\\context/**)"
     ],
     "deny": [],
     "ask": []

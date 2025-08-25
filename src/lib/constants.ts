@@ -2,8 +2,8 @@ export const SITE_CONFIG = {
   name: 'Runcall',
   description: 'Service de closing téléphonique pour entreprises réunionnaises',
   url: 'https://runcall.re',
-  phone: process.env.NEXT_PUBLIC_PHONE || '0262123456',
-  phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY || '02 62 12 34 56',
+  phone: process.env.NEXT_PUBLIC_PHONE || '0262025102',
+  phoneDisplay: process.env.NEXT_PUBLIC_PHONE_DISPLAY || '02 62 02 51 02',
   email: 'contact@runcall.re',
 }
 
@@ -66,7 +66,7 @@ export const PAIN_POINTS = [
 
 export const SOLUTIONS = [
   {
-    title: "Closers 100% Créolophones",
+    title: "Closers 100% Réunionnais",
     description: "Nos experts parlent le langage de vos clients, créent la confiance instantanément",
     icon: "🎯"
   },

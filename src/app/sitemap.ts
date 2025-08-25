@@ -2,55 +2,39 @@ import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://runcall.re';
+  const lastModified = new Date().toISOString();
   
   return [
     {
       url: baseUrl,
-      lastModified: new Date(),
+      lastModified: lastModified,
       changeFrequency: 'weekly',
-      priority: 1,
+      priority: 1.0,
     },
     {
-      url: `${baseUrl}/services`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/tarifs`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/temoignages`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/contact`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-    {
-      url: `${baseUrl}/blog`,
-      lastModified: new Date(),
-      changeFrequency: 'daily',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/mentions-legales`,
-      lastModified: new Date(),
+      url: `${baseUrl}/merci`,
+      lastModified: lastModified,
       changeFrequency: 'yearly',
-      priority: 0.3,
+      priority: 0.1,
     },
-    {
-      url: `${baseUrl}/politique-confidentialite`,
-      lastModified: new Date(),
-      changeFrequency: 'yearly',
-      priority: 0.3,
-    },
+    // Pages futures à ajouter quand elles seront créées
+    // {
+    //   url: `${baseUrl}/blog`,
+    //   lastModified: lastModified,
+    //   changeFrequency: 'daily',
+    //   priority: 0.8,
+    // },
+    // {
+    //   url: `${baseUrl}/mentions-legales`,
+    //   lastModified: lastModified,
+    //   changeFrequency: 'yearly',
+    //   priority: 0.3,
+    // },
+    // {
+    //   url: `${baseUrl}/politique-confidentialite`,
+    //   lastModified: lastModified,
+    //   changeFrequency: 'yearly',
+    //   priority: 0.3,
+    // },
   ];
 }

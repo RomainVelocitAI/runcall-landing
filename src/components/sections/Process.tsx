@@ -158,24 +158,24 @@ const Process = () => {
                   steps: [
                     {
                       icon: (
-                        <div className="p-3 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full shadow-lg">
-                          <Phone className="w-6 h-6 text-white" />
+                        <div className="p-4 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-full shadow-lg">
+                          <Phone className="w-8 h-8 text-white" />
                         </div>
                       ),
                       content: (
-                        <div className="mt-8 px-2">
+                        <div className="mt-12 px-2">
                           <span className="text-gray-800 font-medium text-sm">Audit gratuit de votre processus commercial</span>
                         </div>
                       )
                     },
                     {
                       icon: (
-                        <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full shadow-lg">
-                          <FileText className="w-6 h-6 text-white" />
+                        <div className="p-4 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full shadow-lg">
+                          <FileText className="w-8 h-8 text-white" />
                         </div>
                       ),
                       content: (
-                        <div className="mt-8 px-2">
+                        <div className="mt-12 px-2">
                           <span className="text-gray-800 font-medium text-sm">Analyse de vos scripts et leads actuels</span>
                         </div>
                       )
@@ -187,24 +187,24 @@ const Process = () => {
                   steps: [
                     {
                       icon: (
-                        <div className="p-3 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full shadow-lg">
-                          <Users className="w-6 h-6 text-white" />
+                        <div className="p-4 bg-gradient-to-br from-green-500 to-emerald-500 rounded-full shadow-lg">
+                          <Users className="w-8 h-8 text-white" />
                         </div>
                       ),
                       content: (
-                        <div className="mt-8 px-2">
+                        <div className="mt-12 px-2">
                           <span className="text-gray-800 font-medium text-sm">Attribution de closers experts dans votre domaine</span>
                         </div>
                       )
                     },
                     {
                       icon: (
-                        <div className="p-3 bg-gradient-to-br from-orange-500 to-red-500 rounded-full shadow-lg">
-                          <Target className="w-6 h-6 text-white" />
+                        <div className="p-4 bg-gradient-to-br from-orange-500 to-red-500 rounded-full shadow-lg">
+                          <Target className="w-8 h-8 text-white" />
                         </div>
                       ),
                       content: (
-                        <div className="mt-8 px-2">
+                        <div className="mt-12 px-2">
                           <span className="text-gray-800 font-medium text-sm">Formation personnalisée sur vos produits</span>
                         </div>
                       )
@@ -216,24 +216,24 @@ const Process = () => {
                   steps: [
                     {
                       icon: (
-                        <div className="p-3 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full shadow-lg">
-                          <Rocket className="w-6 h-6 text-white" />
+                        <div className="p-4 bg-gradient-to-br from-indigo-500 to-purple-500 rounded-full shadow-lg">
+                          <Rocket className="w-8 h-8 text-white" />
                         </div>
                       ),
                       content: (
-                        <div className="mt-8 px-2">
+                        <div className="mt-12 px-2">
                           <span className="text-gray-800 font-medium text-sm">Lancement des appels avec suivi temps réel</span>
                         </div>
                       )
                     },
                     {
                       icon: (
-                        <div className="p-3 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-full shadow-lg">
-                          <ChartBar className="w-6 h-6 text-white" />
+                        <div className="p-4 bg-gradient-to-br from-teal-500 to-cyan-500 rounded-full shadow-lg">
+                          <ChartBar className="w-8 h-8 text-white" />
                         </div>
                       ),
                       content: (
-                        <div className="mt-8 px-2">
+                        <div className="mt-12 px-2">
                           <span className="text-gray-800 font-medium text-sm">Dashboard et analytics détaillés</span>
                         </div>
                       )
@@ -245,12 +245,12 @@ const Process = () => {
                   steps: [
                     {
                       icon: (
-                        <div className="p-3 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full shadow-lg">
-                          <Trophy className="w-6 h-6 text-white" />
+                        <div className="p-4 bg-gradient-to-br from-yellow-500 to-orange-500 rounded-full shadow-lg">
+                          <Trophy className="w-8 h-8 text-white" />
                         </div>
                       ),
                       content: (
-                        <div className="mt-8 px-2">
+                        <div className="mt-12 px-2">
                           <span className="text-gray-800 font-medium text-sm">Optimisation continue et amélioration des résultats</span>
                         </div>
                       )

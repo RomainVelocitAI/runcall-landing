@@ -20,7 +20,7 @@ export default function Toggle3D({ onToggle }: Toggle3DProps) {
     <div className="flex items-center justify-center">
       {/* Toggle 3D Only */}
       <div className="flex items-center gap-6">
-        <span className="text-xl font-semibold text-white">Mode RunCALL</span>
+        <span className="text-xl font-semibold text-white">Mode RunCall</span>
         <div 
           className="relative w-[120px] h-[60px] cursor-pointer select-none"
           onClick={handleToggle}

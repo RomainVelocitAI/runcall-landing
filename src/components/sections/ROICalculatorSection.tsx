@@ -48,7 +48,7 @@ const ROICalculatorSection = () => {
               Calculez Votre <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">Potentiel de Croissance</span>
             </h2>
             <p className="text-xl text-text-secondary max-w-3xl mx-auto">
-              Découvrez combien RunCALL peut vous rapporter chaque mois avec notre simulateur interactif
+              Découvrez combien RunCall peut vous rapporter chaque mois avec notre simulateur interactif
             </p>
           </motion.div>
 

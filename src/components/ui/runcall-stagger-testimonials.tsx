@@ -9,21 +9,21 @@ const SQRT_5000 = Math.sqrt(5000);
 const testimonials = [
   {
     tempId: 0,
-    testimonial: "En 3 mois, RunCALL a multiplié par 3 nos ventes. Leur approche locale fait toute la différence.",
+    testimonial: "En 3 mois, RunCall a multiplié par 3 nos ventes. Leur approche locale fait toute la différence.",
     by: "Marie L., Directrice Commerciale",
     company: "Tech Solutions Réunion",
     imgSrc: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop"
   },
   {
     tempId: 1,
-    testimonial: "Les closers de RunCALL connaissent parfaitement le marché réunionnais. Résultats exceptionnels !",
+    testimonial: "Les closers de RunCall connaissent parfaitement le marché réunionnais. Résultats exceptionnels !",
     by: "Jean-Paul M., CEO",
     company: "Import Export OI",
     imgSrc: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&h=150&fit=crop"
   },
   {
     tempId: 2,
-    testimonial: "40% de taux de conversion sur nos leads qualifiés. RunCALL a dépassé toutes nos attentes.",
+    testimonial: "40% de taux de conversion sur nos leads qualifiés. RunCall a dépassé toutes nos attentes.",
     by: "Sophie R., Responsable Marketing",
     company: "E-commerce 974",
     imgSrc: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop"
@@ -37,7 +37,7 @@ const testimonials = [
   },
   {
     tempId: 4,
-    testimonial: "RunCALL nous a permis de nous concentrer sur notre cœur de métier. Ventes +250% en 6 mois.",
+    testimonial: "RunCall nous a permis de nous concentrer sur notre cœur de métier. Ventes +250% en 6 mois.",
     by: "Nathalie B., Fondatrice",
     company: "Beauté Créole",
     imgSrc: "https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop"
@@ -58,14 +58,14 @@ const testimonials = [
   },
   {
     tempId: 7,
-    testimonial: "RunCALL a transformé notre approche commerciale. Le paiement au résultat, c'est l'idéal.",
+    testimonial: "RunCall a transformé notre approche commerciale. Le paiement au résultat, c'est l'idéal.",
     by: "David F., PDG",
     company: "Solar Réunion",
     imgSrc: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=150&h=150&fit=crop"
   },
   {
     tempId: 8,
-    testimonial: "6 nouveaux clients grands comptes en 2 mois. L'expertise de RunCALL est indéniable.",
+    testimonial: "6 nouveaux clients grands comptes en 2 mois. L'expertise de RunCall est indéniable.",
     by: "Isabelle P., Commerciale",
     company: "Logistique 974",
     imgSrc: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop"

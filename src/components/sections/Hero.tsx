@@ -27,7 +27,7 @@ const Hero = () => {
   return (
     <AnimatedShaderHero
       headline={{
-        line1: "RunCALL convertit",
+        line1: "RunCall convertit",
         line2: "vos prospects en clients"
       }}
       subtitle="Vous payez de la pub mais vous ne convertissez pas ? On s'occupe de transformer vos prospects en clients."

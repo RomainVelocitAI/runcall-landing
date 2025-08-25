@@ -42,7 +42,7 @@ const SocialProof = () => {
             Ils Ont <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-cyan-600">Multiplié Leurs Ventes</span>
           </h2>
           <p className="text-xl text-text-secondary text-center mb-12">
-            Découvrez comment RunCALL a transformé leur business
+            Découvrez comment RunCall a transformé leur business
           </p>
 
           {/* Interactive Stagger Testimonials */}

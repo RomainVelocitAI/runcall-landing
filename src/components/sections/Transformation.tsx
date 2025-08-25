@@ -58,7 +58,7 @@ const Transformation = () => {
           className="max-w-5xl mx-auto"
         >
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-montserrat font-bold text-center mb-12">
-            Changez cela avec RunCALL
+            Changez cela avec RunCall
           </h2>
 
           <div className="mb-12">
