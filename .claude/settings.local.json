@@ -17,7 +17,8 @@
       "Bash(npx shadcn@latest add \"https://magicui.design/r/animated-subscribe-button\")",
       "Bash(npx shadcn@latest add \"https://magicui.design/r/sparkles-text\")",
       "Read(/D:\\bonnes_pratiques\\context/**)",
-      "Read(/D:\\bonnes_pratiques\\context/**)"
+      "Read(/D:\\bonnes_pratiques\\context/**)",
+      "Bash(npm run build:*)"
     ],
     "deny": [],
     "ask": []
