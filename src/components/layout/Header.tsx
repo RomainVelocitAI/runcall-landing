@@ -44,7 +44,7 @@ const Header = () => {
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
             <a 
-              href="#solution" 
+              href="#transformation" 
               className={`font-medium transition-colors ${
                 isScrolled ? 'text-gray-700 hover:text-primary' : 'text-white hover:text-cyan-300'
               }`}

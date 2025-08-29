@@ -49,7 +49,7 @@ const Transformation = () => {
   };
 
   return (
-    <section ref={sectionRef} className="py-20 bg-gradient-to-br from-blue-600 to-cyan-600 text-white">
+    <section ref={sectionRef} id="transformation" className="py-20 bg-gradient-to-br from-blue-600 to-cyan-600 text-white">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
