@@ -69,9 +69,9 @@ const Header = () => {
             </a>
             <a 
               href="#contact-form" 
-              className={`px-6 py-2 rounded-full font-semibold transition-all ${
+              className={`px-6 py-2 rounded-full font-semibold transition-all shadow-lg ${
                 isScrolled 
-                  ? 'bg-primary text-white hover:bg-secondary' 
+                  ? 'bg-blue-600 text-white hover:bg-blue-700' 
                   : 'bg-cyan-500 text-white hover:bg-cyan-600'
               }`}
             >
