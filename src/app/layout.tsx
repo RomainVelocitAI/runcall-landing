@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter, Plus_Jakarta_Sans, Sora } from 'next/font/google';
 import Script from 'next/script';
 import { GA_TRACKING_ID, FB_PIXEL_ID } from '@/lib/analytics';
+import CookieBanner from '@/components/shared/CookieBanner';
 import '@/styles/globals.css';
 
 const inter = Inter({ 
@@ -314,6 +315,7 @@ export default function RootLayout({
       </head>
       <body className={inter.className}>
         {children}
+        <CookieBanner />
       </body>
     </html>
   );

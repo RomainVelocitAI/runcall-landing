@@ -125,16 +125,28 @@ const Footer = () => {
             <p className="text-gray-400 text-sm mb-4 md:mb-0">
               © {currentYear} Runcall. Tous droits réservés.
             </p>
-            <div className="flex gap-6 text-sm">
-              <a href="#" className="text-gray-400 hover:text-white transition">
+            <div className="flex flex-wrap gap-4 md:gap-6 text-sm">
+              <Link href="/mentions-legales" className="text-gray-400 hover:text-white transition">
                 Mentions Légales
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition">
+              </Link>
+              <Link href="/politique-confidentialite" className="text-gray-400 hover:text-white transition">
                 Politique de Confidentialité
-              </a>
-              <a href="#" className="text-gray-400 hover:text-white transition">
+              </Link>
+              <Link href="/cgv" className="text-gray-400 hover:text-white transition">
                 CGV
-              </a>
+              </Link>
+              <Link href="/politique-cookies" className="text-gray-400 hover:text-white transition">
+                Cookies
+              </Link>
+              <button 
+                onClick={() => {
+                  localStorage.removeItem('cookieConsent');
+                  window.location.reload();
+                }}
+                className="text-gray-400 hover:text-white transition cursor-pointer"
+              >
+                Gérer mes cookies
+              </button>
             </div>
           </div>
         </div>
