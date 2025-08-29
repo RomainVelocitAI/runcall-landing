@@ -26,7 +26,11 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
           {/* Logo */}
-          <div className="flex items-center">
+          <a 
+            href="/#"
+            className="flex items-center cursor-pointer transition-transform hover:scale-105"
+            aria-label="Retour à l'accueil"
+          >
             <Image
               src="/logo-transparent.png"
               alt="Runcall"
@@ -35,7 +39,7 @@ const Header = () => {
               className="object-contain"
               priority
             />
-          </div>
+          </a>
 
           {/* Navigation */}
           <nav className="hidden md:flex items-center space-x-8">
