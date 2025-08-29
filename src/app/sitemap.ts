@@ -12,29 +12,28 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 1.0,
     },
     {
-      url: `${baseUrl}/merci`,
+      url: `${baseUrl}/mentions-legales`,
       lastModified: lastModified,
-      changeFrequency: 'yearly',
-      priority: 0.1,
+      changeFrequency: 'monthly',
+      priority: 0.3,
     },
-    // Pages futures à ajouter quand elles seront créées
-    // {
-    //   url: `${baseUrl}/blog`,
-    //   lastModified: lastModified,
-    //   changeFrequency: 'daily',
-    //   priority: 0.8,
-    // },
-    // {
-    //   url: `${baseUrl}/mentions-legales`,
-    //   lastModified: lastModified,
-    //   changeFrequency: 'yearly',
-    //   priority: 0.3,
-    // },
-    // {
-    //   url: `${baseUrl}/politique-confidentialite`,
-    //   lastModified: lastModified,
-    //   changeFrequency: 'yearly',
-    //   priority: 0.3,
-    // },
+    {
+      url: `${baseUrl}/politique-confidentialite`,
+      lastModified: lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/politique-cookies`,
+      lastModified: lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.3,
+    },
+    {
+      url: `${baseUrl}/cgv`,
+      lastModified: lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.3,
+    },
   ];
 }

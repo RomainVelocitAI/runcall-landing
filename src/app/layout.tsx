@@ -26,9 +26,9 @@ const sora = Sora({
 });
 
 export const metadata: Metadata = {
-  title: 'RunCall » Closing Téléphonique Réunion | +300% Ventes',
-  description: 'Transformez vos leads en clients avec RunCall. Closers experts réunionnais. ✓ 0€ fixe pour startups ✓ Garantie résultats ✓ ROI x4',
-  keywords: 'closing téléphonique réunion, closer 974, conversion leads réunion, vente b2b réunion, prospection commerciale 974, télévente la réunion, closer réunionnais, équipe locale 974',
+  title: 'RunCall - Closing Téléphonique Expert La Réunion',
+  description: 'Service de closing téléphonique qui multiplie vos ventes par 3. Closers experts 100% réunionnais. 0€ fixe pour startups, commission au résultat. ROI moyen x4 garanti.',
+  keywords: 'closing téléphonique réunion, closer 974, conversion leads réunion, vente b2b réunion, prospection commerciale 974, télévente la réunion, closer réunionnais, équipe locale 974, transformation prospects clients, augmentation taux conversion, service closing local',
   authors: [{ name: 'RunCall' }],
   creator: 'RunCall',
   publisher: 'RunCall',
@@ -272,6 +272,7 @@ export default function RootLayout({
             })
           }}
         />
+        
         {/* Google Analytics */}
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`}
